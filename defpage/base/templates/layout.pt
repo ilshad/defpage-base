@@ -48,13 +48,13 @@
 	<div class="span-200 first">
 	  <metal:block define-slot="sidebar"></metal:block>
 	</div>
-	<div class="span-600 last">
+	<div id="main" class="span-600 last">
 	  <metal:block define-slot="messages">
 	    <tal:block repeat="item request.session.pop_flash()">
 	      <div class="notice" tal:content="structure item" />
 	    </tal:block>
 	  </metal:block>
-	  <div id="main"><metal:block define-slot="main"></metal:block></div>
+	  <metal:block define-slot="main"></metal:block>
 	</div>
 	<div class="span-800" id="footer">
 	  <div class="span-400" id="addinfo">
