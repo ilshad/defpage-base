@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="ru">
+  <metal:block use-macro="layout.macros['master']">
+    <metal:block fill-slot="breadcrumbs">
+      <div class="breadcrumbs"><a href="/">collections</a> &rArr; ${info['title']}</div>
+    </metal:block>
+    <metal:block fill-slot="main">
+      <div class="unified">
+	<!--div class="alt_label">
+	  ${info['title']}
+	</div-->
+      </div>
+    </metal:block>
+  </metal:block>
+</html>

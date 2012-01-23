@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="ru">
+  <metal:block define-macro="master">
+    <head>
+      <title>defpage</title>
+      <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+      <meta name="keywords" content="" />
+      <meta name="description" content="" />
+      <link rel="shortcut icon" href="${static_url}/images/favicon.ico" />
+      <link rel="stylesheet" href="${static_url}/css/screen.css" type="text/css" media="screen, projection" />
+      <link rel="stylesheet" href="${static_url}/css/print.css" type="text/css" media="print" />
+      <!--[if lt IE 8]>
+	  <link rel="stylesheet" href="${static_url}/css/ie.css" type="text/css" media="screen, projection">
+      <![endif]-->
+      <script type="text/javascript" src="${static_url}/js/jquery-1.7.1.min.js"></script>
+      <script type="text/javascript" src="${static_url}/js/jqplug.js"></script>
+      <script type="text/javascript" src="${static_url}/js/defpage.js"></script>
+    </head>
+    <body>
+      <div tal:attributes="class string: container ${request.GET.get('x') and 'showgrid'}">
+	<div id="header" class="span-800">
+	  <div class="span-200">
+	    <a href="/" id="logo"><span class="logo1">def</span><span class="logo2">page</span></a>
+	  </div>
+	  <div id="topbar" class="span-600 last textalign-right">
+	    <tal:block condition="user.user_id is not None">
+	      <div id="personal_menu">
+		<a href="#" id="usertitle">${user.email}</a>
+		<div id="personal_menu_items">
+		  <a href="/create_collection">Create collection</a>
+		  <a href="/">Create document</a>
+		  <a href="${accounts_url}${user.user_id}">Account</a>
+		  <a href="${logout_url}">Logout</a>
+		</div>
+	      </div>
+	    </tal:block>
+	    <tal:block condition="user.user_id is None">
+	      <a href="${login_url}">Login</a>
+	    </tal:block>
+	  </div>
+	</div>
+	<div id="cleartop"></div>
+	<metal:block define-slot="breadcrumbs"></metal:block>
+	<div class="span-200 first">
+	  <metal:block define-slot="sidebar"></metal:block>
+	</div>
+	<div class="span-600 last">
+	  <metal:block define-slot="messages">
+	    <tal:block repeat="item request.session.pop_flash()">
+	      <div class="notice" tal:content="structure item" />
+	    </tal:block>
+	  </metal:block>
+	  <metal:block define-slot="main"></metal:block>
+	</div>
+	<div class="span-800" id="footer">
+	  <div class="span-400" id="addinfo">
+	    <a href="/about">About</a>
+	    <a href="/help">Help</a>
+	  </div>
+	  <div class="span-400 last textalign-right" id="copyrights">
+	    <a href="/">defpage &copy; 2011</a>
+	  </div>
+	</div>
+      </div>
+    </body>
+  </metal:block>
+</html>

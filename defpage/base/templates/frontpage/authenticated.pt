@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="ru">
+  <metal:block use-macro="layout.macros['master']">
+    <metal:block fill-slot="main">
+      <div class="actions_master" tal:condition="len(collections) == 0">
+	You have not created any collections yet.<br />
+	<a href="/create_collection">Create new collection.</a>
+      </div>
+      <div class="unified" tal:condition="len(collections) > 0">
+	<div class="alt_label">Collections</div>
+	<ul class="pretty">
+	  <li tal:repeat="x collections">
+	    <a href="/collection/${x['id']}">${x['title']}</a>
+	  </li>
+	</ul>
+      </div>
+    </metal:block>
+  </metal:block>
+</html>

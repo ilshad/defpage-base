@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="ru">
+  <metal:block use-macro="layout.macros['master']">
+    <metal:block fill-slot="main">
+
+      <form class="unified" method="POST" tal:attributes="action python:request.path_url">
+	<div class="form_label">Create new collection</div>
+	<div class="row">
+	  <label for="title">Title</label>
+	  <input type="text" name="title" style="width:100%; margin:0;" />
+	</div>
+	<div class="row">
+	  <input type="submit" name="submit" value="Continue" class="first" style="margin-top:5px;" />
+	  <a href="/" class="last">Cancel</a>
+	</div>
+      </form>
+
+    </metal:block>
+  </metal:block>
+</html>

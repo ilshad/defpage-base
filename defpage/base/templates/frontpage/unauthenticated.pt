@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xml:lang="ru">
+  <head>
+    <title>defpage</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="shortcut icon" href="${static_url}/images/favicon.ico" />
+    <link rel="stylesheet" href="${static_url}/css/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="${static_url}/css/print.css" type="text/css" media="print" />
+    <!--[if lt IE 8]>
+	<link rel="stylesheet" href="${static_url}/css/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <script type="text/javascript" src="${static_url}/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="${static_url}/js/jqplug.js"></script>
+    <script type="text/javascript" src="${static_url}/js/defpage.js"></script>
+  </head>
+  <body>
+    <div class="container big">
+      <a href="/"><img id="frontpage_logo" src="${static_url}/images/logo_verdana.png" id="frontpage_logo" width="600px" /></a>
+      <div class="clear"></div>
+      <tal:block repeat="item request.session.pop_flash()">
+	<div class="notice" tal:content="structure item" />
+      </tal:block>
+      <div class="description" style="width:250px;">
+	<div style="font-weight:bold; margin:9px 0 5px 0;"><a href="${signup_url}">Signup</a> for a defpage account!</div>
+	You're only several steps from transforming your existing cloud content into a powerful and secure CMS.
+	Click <a href="#examples" onclick="return false;" style="border-bottom:2px dotted #a52a2a; font-weight:bold;">here</a> to see how!
+      </div>
+      <div style="float:left">
+	<form name="fields" method="POST" action="${login_url}">
+	  <table style="width:325px;">
+	    <tr>
+	      <td><input type="text" name="login" class="bold" style="width:100%;" value="enter your email address" onblur="if(this.value=='')this.value='enter your email address';" onfocus="if(this.value='enter your email address')this.value='';" /></td>
+	    </tr>
+	    <tr>
+	      <td><input type="text" name="password" class="bold" style="width:100%;" value="enter password" onblur="if(this.value==''){this.value='enter password'; this.type='text';}" onfocus="if(this.value='enter password'){this.value=''; this.type='password';}" /></td>
+	    </tr>
+	    <tr>
+	      <td><input type="submit" name="submit" id="sign" value="log in" class="first fill" /></td>
+	    </tr>
+	  </table>
+	</form>  
+      </div>
+    </div>
+  </body>
+</html>
