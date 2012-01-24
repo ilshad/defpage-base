@@ -42,7 +42,14 @@ def display_collection(req):
     return {"info":info}
 
 def collection_properties(req):
-    return {}
+    cid = req.matchdict["name"]
+    info = meta.get_collection(cid)    
+    if req.POST.get("submit"):
+        title = req.POST.get("title")
+        if title:
+            meta.edit_collection(cid, title=title)
+            return HTTPFound(location="/collection/%s" % cid)
+    return {"info":info}
 
 def collection_permissions(req):
     return {}

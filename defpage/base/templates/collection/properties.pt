@@ -4,12 +4,18 @@
       xml:lang="ru">
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
-      <div class="unified">
-	<div class="alt_label">
-	  properties
+      <form class="unified" method="POST" tal:attributes="action python:request.path_url">
+	<div class="form_label">Edit group properties</div>
+	<div class="row">
+	  <label for="title">Title</label>
+	  <input type="text" name="title" style="width:100%; margin:0;" value="${info['title']}" />
 	</div>
-	<a href="/collection/${active_collection_id}">back</a>
-      </div>
+	<div class="row">
+	  <input type="submit" name="submit" value="Save changes" class="first" style="margin-top:5px;" />
+	  <a href="/collection/${active_collection_id}" class="last">Cancel</a>
+	</div>
+      </form>
+      <a href="/collection/${active_collection_id}">back</a>
     </metal:block>
   </metal:block>
 </html>
