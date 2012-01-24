@@ -1,6 +1,6 @@
 from pyramid.renderers import get_renderer
+from defpage.lib.interfaces import IUser
 from defpage.base.config import system_params
-from defpage.base.interfaces import IUser
 
 def renderer_add_globals(e):
     e["layout"] = get_renderer("defpage.base:templates/layout.pt").implementation()

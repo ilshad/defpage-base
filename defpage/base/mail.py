@@ -1,7 +1,7 @@
 import json
 import httplib2
+from defpage.lib.exceptions import ServiceCallError
 from defpage.base.config import system_params
-from defpage.base.exceptions import ServiceCallError
 
 def sendmail(recipients, subject, body):
     url = system_params.mail_url

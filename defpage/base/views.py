@@ -1,8 +1,8 @@
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from pyramid.security import authenticated_userid
+from defpage.lib.interfaces import IUser
 from defpage.base.config import system_params
-from defpage.base.interfaces import IUser
 from defpage.base import meta
 
 def anonym_only(func):

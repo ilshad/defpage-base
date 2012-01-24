@@ -1,7 +1,7 @@
 import json
 import httplib2
 from pyramid.httpexceptions import HTTPNotFound
-from defpage.base.exceptions import ServiceCallError
+from defpage.lib.exceptions import ServiceCallError
 from defpage.base.config import system_params
 
 def search_collections(userid):
