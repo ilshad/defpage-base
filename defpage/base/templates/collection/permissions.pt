@@ -5,7 +5,10 @@
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <div class="unified">
-	permissions
+	<div class="alt_label">
+	  permissions
+	</div>
+	<a href="/collection/${active_collection_id}">back</a>
       </div>
     </metal:block>
   </metal:block>
