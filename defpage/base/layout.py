@@ -1,5 +1,5 @@
 from pyramid.renderers import get_renderer
-from defpage.lib.interfaces import IUser
+from defpage.lib.authentication import IUser
 from defpage.base.config import system_params
 
 def renderer_add_globals(e):

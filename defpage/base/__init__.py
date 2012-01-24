@@ -3,7 +3,7 @@ from pyramid.exceptions import NotFound
 from pyramid.exceptions import Forbidden
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from defpage.lib.authentication import AuthenticationPolicy
-from defpage.lib.interfaces import IUser
+from defpage.lib.authentication import IUser
 from defpage.lib.util import is_int
 from defpage.base.config import system_params
 from defpage.base.security import User
