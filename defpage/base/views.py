@@ -2,6 +2,7 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from pyramid.security import authenticated_userid
 from defpage.base.config import system_params
+from defpage.base.interfaces import IUser
 from defpage.base import meta
 
 def anonym_only(func):
@@ -22,7 +23,7 @@ def default(req):
     userid = authenticated_userid(req)
     if not userid:
         return render_to_response("defpage.base:templates/frontpage/unauthenticated.pt", {"login_url":system_params.login_url, "signup_url":system_params.signup_url}, request=req)
-    return render_to_response("defpage.base:templates/frontpage/authenticated.pt", {"collections":meta.search_collections(userid)}, request=req)
+    return render_to_response("defpage.base:templates/frontpage/authenticated.pt", {}, request=req)
 
 def create_collection(req):
     if req.POST.get("submit"):
