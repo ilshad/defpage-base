@@ -15,7 +15,6 @@
 	  <a href="/collection/${active_collection_id}" class="last">Cancel</a>
 	</div>
       </form>
-      <a href="/collection/${active_collection_id}">back</a>
     </metal:block>
   </metal:block>
 </html>
