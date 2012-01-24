@@ -7,8 +7,8 @@
       <form class="unified" method="POST" tal:attributes="action python:request.path_url">
 	<div class="form_label" style="color:red">Delete collection "${info['title']}</div>
 	<div class="row">
-	  <label for="confirm">Confirm delete collection</label>
-	  <input type="checkbox" name="confirm">
+	  <label for="confirm" style="display:inline; vertical-align:top;">Confirm delete collection</label>
+	  <input type="checkbox" name="confirm" style="vertical-align:top;">
 	</div>
 	<div class="row">
 	  <input type="submit" name="submit" value="Delete!" class="first" style="margin-top:5px;" />

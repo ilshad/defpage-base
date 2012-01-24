@@ -18,6 +18,9 @@
 	  </tr>
 	</table>
       </div>
+      <div class="collection_info">
+	${len(info['documents'])} documents.
+      </div>
     </metal:block>
   </metal:block>
 </html>

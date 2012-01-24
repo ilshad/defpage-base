@@ -47,7 +47,7 @@
 	    <tal:block condition="len(user.collections) > 0">
 	      <div class="collection_item">
 		<a href="/" class="${request.path == '/' and 'selected' or ''}">
-		  [ free documents ]
+		  Free documents
 		</a>
 	      </div>
 	      <div class="collection_item" tal:repeat="c user.collections">
