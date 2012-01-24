@@ -5,13 +5,13 @@
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <form class="unified" method="POST" tal:attributes="action python:request.path_url">
-	<div class="form_label">Edit collection properties</div>
+	<div class="form_label" style="color:red">Delete collection "${info['title']}</div>
 	<div class="row">
-	  <label for="title">Title</label>
-	  <input type="text" name="title" style="width:100%; margin:0;" value="${info['title']}" />
+	  <label for="confirm">Confirm delete collection</label>
+	  <input type="checkbox" name="confirm">
 	</div>
 	<div class="row">
-	  <input type="submit" name="submit" value="Save changes" class="first" style="margin-top:5px;" />
+	  <input type="submit" name="submit" value="Delete!" class="first" style="margin-top:5px;" />
 	  <a href="/collection/${active_collection_id}" class="last">Cancel</a>
 	</div>
       </form>

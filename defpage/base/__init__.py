@@ -33,6 +33,9 @@ def main(global_config, **settings):
     config.add_route("collection_properties", "/collection/{name}/properties", custom_predicates=(is_int,))
     config.add_view("defpage.base.views.collection_properties", route_name="collection_properties", renderer="defpage.base:templates/collection/properties.pt")
 
+    config.add_route("delete_collection", "/collection/{name}/delete", custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.delete_collection", route_name="delete_collection", renderer="defpage.base:templates/collection/delete.pt")
+
     config.add_route("collection_permissions", "/collection/{name}/permissions", custom_predicates=(is_int,))
     config.add_view("defpage.base.views.collection_permissions", route_name="collection_permissions", renderer="defpage.base:templates/collection/permissions.pt")
 

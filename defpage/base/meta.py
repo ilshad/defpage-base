@@ -35,3 +35,9 @@ def edit_collection(cid, **kw):
     r, c = h.request(system_params.meta_url + "/collections/" + str(cid), "PUT", json.dumps(kw))
     if r.status != 204:
         raise ServiceCallError
+
+def delete_collection(cid):
+    h = httplib2.Http()
+    r, c = h.request(system_params.meta_url + "/collections/" + str(cid), "DELETE")
+    if r.status != 204:
+        raise ServiceCallError

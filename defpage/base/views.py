@@ -41,6 +41,15 @@ def display_collection(req):
     info = meta.get_collection(cid)
     return {"info":info}
 
+def delete_collection(req):
+    cid = req.matchdict["name"]
+    info = meta.get_collection(cid)
+    if req.POST.get("submit"):
+        if req.POST.get("confirm"):
+            meta.delete_collection(cid)
+            return HTTPFound(location="/")
+    return {"info":info}
+
 def collection_properties(req):
     cid = req.matchdict["name"]
     info = meta.get_collection(cid)    
