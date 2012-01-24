@@ -40,3 +40,15 @@ def display_collection(req):
     cid = req.matchdict["name"]
     info = meta.get_collection(cid)
     return {"info":info}
+
+def collection_properties(req):
+    return {}
+
+def collection_permissions(req):
+    return {}
+
+def source_overview(req):
+    return {}
+
+def transmission_overview(req):
+    return {}

@@ -48,12 +48,12 @@
 	  <metal:block define-slot="sidebar">
 	    <tal:block condition="len(user.collections) > 0">
 	      <div class="collection_item">
-		<a href="/" class="${active_collection is None and 'selected' or ''}">
+		<a href="/" class="${active_collection_id is None and 'selected' or ''}">
 		  [ free documents ]
 		</a>
 	      </div>
 	      <div class="collection_item" tal:repeat="c user.collections">
-		<a href="/collection/${c['id']}" class="${active_collection == c['id'] and 'selected' or ''}">
+		<a href="/collection/${c['id']}" class="${active_collection_id == c['id'] and 'selected' or ''}">
 		  ${c['title']}
 		</a>
 	      </div>
@@ -61,7 +61,7 @@
 	    <tal:block condition="len(user.collections) == 0"></tal:block>
 	  </metal:block>
 	</div>
-	<div id="main" class="span-600 last">
+	<div class="span-600 last">
 	  <metal:block define-slot="messages">
 	    <tal:block repeat="item request.session.pop_flash()">
 	      <div class="notice" tal:content="structure item" />

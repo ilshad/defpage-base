@@ -30,4 +30,16 @@ def main(global_config, **settings):
     config.add_route("display_collection", "/collection/{name}", custom_predicates=(is_int,))
     config.add_view("defpage.base.views.display_collection", route_name="display_collection", renderer="defpage.base:templates/collection/display.pt")
 
+    config.add_route("collection_properties", "/collection/{name}/properties", custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.collection_properties", route_name="collection_properties", renderer="defpage.base:templates/collection/properties.pt")
+
+    config.add_route("collection_permissions", "/collection/{name}/permissions", custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.collection_permissions", route_name="collection_permissions", renderer="defpage.base:templates/collection/permissions.pt")
+
+    config.add_route("source_overview", "/collection/{name}/source", custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.source_overview", route_name="source_overview", renderer="defpage.base:templates/source/overview.pt")
+
+    config.add_route("transmission_overview", "/collection/{name}/transmission", custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.transmission_overview", route_name="transmission_overview", renderer="defpage.base:templates/transmission/overview.pt")
+
     return config.make_wsgi_app()

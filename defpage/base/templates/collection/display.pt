@@ -5,9 +5,17 @@
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <div class="unified">
-	<!--div class="alt_label">
+	<div class="alt_label">
 	  ${info['title']}
-	</div-->
+	</div>
+	<table style="width:100%; margin:0;">
+	  <tr>
+	    <td style="width:25%"><a href="/collection/${active_collection_id}/properties">Properties</a></td>
+	    <td style="width:25%"><a href="/collection/${active_collection_id}/source">Source</a></td>
+	    <td style="width:25%"><a href="/collection/${active_collection_id}/transmission">Transmission</a></td>
+	    <td style="width:25%"><a href="/collection/${active_collection_id}/permissions">Permissions</a></td>
+	  </tr>
+	</table>
       </div>
     </metal:block>
   </metal:block>

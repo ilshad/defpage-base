@@ -9,7 +9,7 @@ def renderer_add_globals(e):
     e["login_url"] = system_params.login_url
     e["logout_url"] = system_params.logout_url
     e["accounts_url"] = system_params.accounts_url
-    e["active_collection"] = active_collection(e["request"])
+    e["active_collection_id"] = active_collection(e["request"])
 
 def active_collection(req):
     if req.path_info_pop() == "collection":
