@@ -66,7 +66,7 @@ def collection_properties(req):
             return HTTPFound(location="/collection/%s" % cid)
     return {"info":info}
 
-def collection_permissions(req):
+def collection_roles(req):
     return {}
 
 def source_overview(req):

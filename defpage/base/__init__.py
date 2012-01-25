@@ -60,12 +60,12 @@ def main(global_config, **settings):
                     route_name="delete_collection",
                     renderer="defpage.base:templates/collection/delete.pt")
 
-    config.add_route("collection_permissions",
-                     "/collection/{name}/permissions",
+    config.add_route("collection_roles",
+                     "/collection/{name}/roles",
                      custom_predicates=(is_int,))
-    config.add_view("defpage.base.views.collection_permissions",
-                    route_name="collection_permissions",
-                    renderer="defpage.base:templates/collection/permissions.pt")
+    config.add_view("defpage.base.views.collection_roles",
+                    route_name="collection_roles",
+                    renderer="defpage.base:templates/collection/roles.pt")
 
     # source
     config.add_route("source_overview",

@@ -6,7 +6,7 @@
     <metal:block fill-slot="main">
       <div class="unified">
 	<div class="alt_label">
-	  permissions
+	  Roles
 	</div>
 	<a href="/collection/${active_collection_id}">back</a>
       </div>
