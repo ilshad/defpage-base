@@ -22,8 +22,12 @@ def forbidden(req):
 def default(req):
     userid = authenticated_userid(req)
     if not userid:
-        return render_to_response("defpage.base:templates/frontpage/unauthenticated.pt", {"login_url":system_params.login_url, "signup_url":system_params.signup_url}, request=req)
-    return render_to_response("defpage.base:templates/frontpage/authenticated.pt", {}, request=req)
+        return render_to_response("defpage.base:templates/frontpage/unauthenticated.pt",
+                                  {"login_url":system_params.login_url,
+                                   "signup_url":system_params.signup_url},
+                                  request=req)
+    return render_to_response("defpage.base:templates/frontpage/authenticated.pt",
+                              {}, request=req)
 
 def create_collection(req):
     if req.POST.get("submit"):
@@ -38,25 +42,27 @@ def create_collection(req):
 
 def display_collection(req):
     cid = req.matchdict["name"]
-    info = meta.get_collection(cid)
+    info = meta.get_collection(cid, authenticated_userid(req))
     return {"info":info}
 
 def delete_collection(req):
     cid = req.matchdict["name"]
-    info = meta.get_collection(cid)
+    userid = authenticated_userid(req)
+    info = meta.get_collection(cid, userid)
     if req.POST.get("submit"):
         if req.POST.get("confirm"):
-            meta.delete_collection(cid)
+            meta.delete_collection(cid, userid)
             return HTTPFound(location="/")
     return {"info":info}
 
 def collection_properties(req):
     cid = req.matchdict["name"]
-    info = meta.get_collection(cid)    
+    userid = authenticated_userid(req)
+    info = meta.get_collection(cid, userid)
     if req.POST.get("submit"):
         title = req.POST.get("title")
         if title:
-            meta.edit_collection(cid, title=title)
+            meta.edit_collection(cid, userid, title=title)
             return HTTPFound(location="/collection/%s" % cid)
     return {"info":info}
 

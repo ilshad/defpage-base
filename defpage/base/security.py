@@ -8,7 +8,9 @@ class User(UserBase):
     collections = None
 
     def authenticate(self, request):
-        super(User, self).authenticate(request, system_params.auth_session_cookie_name, system_params.sessions_url)
+        super(User, self).authenticate(request,
+                                       system_params.auth_session_cookie_name,
+                                       system_params.sessions_url)
 
     def _authenticated(self, request, info):
         self.email = info['email']
