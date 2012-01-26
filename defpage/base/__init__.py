@@ -1,6 +1,7 @@
 from pyramid.config import Configurator
 from pyramid.exceptions import NotFound
 from pyramid.exceptions import Forbidden
+from pyramid.httpexceptions import HTTPUnauthorized
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from defpage.lib.authentication import UserInfoAuthenticationPolicy
 from defpage.lib.util import is_int
@@ -21,7 +22,13 @@ def main(global_config, **settings):
                           "pyramid.events.BeforeRender")
 
     # misc
-    config.add_view("defpage.base.views.forbidden", "", context=Forbidden)
+    config.add_view("defpage.base.views.forbidden",
+                    "", context=Forbidden,
+                    renderer="defpage.base:templates/unauthorized.pt")
+
+    config.add_view("defpage.base.views.unauthorized",
+                    "", context=HTTPUnauthorized,
+                    renderer="defpage.base:templates/unauthorized.pt")
     config.add_view("defpage.base.views.empty", "",
                     renderer="defpage.base:templates/notfound.pt",
                     context=NotFound)

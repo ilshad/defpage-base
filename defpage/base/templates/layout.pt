@@ -37,7 +37,7 @@
 	      </div>
 	    </tal:block>
 	    <tal:block condition="not request.user.authenticated">
-	      <a href="${login_url}">Login</a>
+	      <a href="${login_url}" style="margin-right:10px;">Login</a>
 	    </tal:block>
 	  </div>
 	</div>

@@ -6,7 +6,7 @@
       xml:lang="ru">
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
-      <div class="hi_block">
+      <div style="padding:10px;">
 	<table width="100%">
 	  <tr>
 	    <td>

@@ -15,7 +15,12 @@ def empty(req):
     return {}
 
 def forbidden(req):
-    return HTTPFound(location=system_params.login_url)
+    req.response.status = 403
+    return {}
+
+def unauthorized(req):
+    req.response.status = 401
+    return {}
 
 def default(req):
     if not req.user.authenticated:
