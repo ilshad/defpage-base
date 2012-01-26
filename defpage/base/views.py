@@ -68,3 +68,6 @@ def source_overview(req):
 
 def transmission_overview(req):
     return {}
+
+def public_overview(req):
+    return {}
