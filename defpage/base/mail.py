@@ -8,6 +8,6 @@ def sendmail(recipients, subject, body):
     content = json.dumps({'recipients':recipients, 'subject':subject, 'body':body})
     headers = {'Content-Type':'application/json'}
     h = httplib2.Http()
-    response, _c = h.request(url, "POST", content, headers)
-    if response.status != 202:
+    r, c = h.request(url, "POST", content, headers)
+    if r.status != 202:
         raise ServiceCallError

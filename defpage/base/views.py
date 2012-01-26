@@ -1,13 +1,11 @@
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
-from pyramid.security import authenticated_userid
-from defpage.lib.authentication import IUser
 from defpage.base.config import system_params
 from defpage.base import meta
 
 def anonym_only(func):
     def wrapper(req):
-        if authenticated_userid(req):
+        if req.user.authenticated:
             req.session.flash(u"You are authenticated already")
             return HTTPFound(location="/")
         return func(req)
@@ -20,8 +18,7 @@ def forbidden(req):
     return HTTPFound(location=system_params.login_url)
 
 def default(req):
-    userid = authenticated_userid(req)
-    if not userid:
+    if not req.user.authenticated:
         return render_to_response("defpage.base:templates/frontpage/unauthenticated.pt",
                                   {"login_url":system_params.login_url,
                                    "signup_url":system_params.signup_url},
@@ -35,34 +32,31 @@ def create_collection(req):
         if not title:
             req.session.flash(u"Title is required")
             return {}
-        userid = authenticated_userid(req)
-        cid = meta.create_collection(title, userid)
+        cid = meta.create_collection(req.user.userid, title)
         return HTTPFound(location="/collection/%s" % cid)
     return {}
 
 def display_collection(req):
     cid = req.matchdict["name"]
-    info = meta.get_collection(cid, authenticated_userid(req))
+    info = meta.get_collection(req.user.userid, cid)
     return {"info":info}
 
 def delete_collection(req):
     cid = req.matchdict["name"]
-    userid = authenticated_userid(req)
-    info = meta.get_collection(cid, userid)
+    info = meta.get_collection(req.user.userid, cid)
     if req.POST.get("submit"):
         if req.POST.get("confirm"):
-            meta.delete_collection(cid, userid)
+            meta.delete_collection(req.user.userid, cid)
             return HTTPFound(location="/")
     return {"info":info}
 
 def collection_properties(req):
     cid = req.matchdict["name"]
-    userid = authenticated_userid(req)
-    info = meta.get_collection(cid, userid)
+    info = meta.get_collection(req.user.userid, cid)
     if req.POST.get("submit"):
         title = req.POST.get("title")
         if title:
-            meta.edit_collection(cid, userid, title=title)
+            meta.edit_collection(req.user.userid, cid, title=title)
             return HTTPFound(location="/collection/%s" % cid)
     return {"info":info}
 

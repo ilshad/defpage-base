@@ -2,27 +2,23 @@ from pyramid.config import Configurator
 from pyramid.exceptions import NotFound
 from pyramid.exceptions import Forbidden
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
-from defpage.lib.authentication import SessionAuthenticationPolicy
-from defpage.lib.authentication import IUser
+from defpage.lib.authentication import UserInfoAuthenticationPolicy
 from defpage.lib.util import is_int
 from defpage.base.config import system_params
-from defpage.base.security import User
 
 def main(global_config, **settings):
     system_params.update(settings)
     session_factory = UnencryptedCookieSessionFactoryConfig("7oDVDSuJ")
-    authentication_policy = SessionAuthenticationPolicy()
+    authentication_policy = UserInfoAuthenticationPolicy()
     config = Configurator()
     config.setup_registry(settings=settings,
                           session_factory=session_factory,
                           authentication_policy=authentication_policy)
 
-    config.registry.registerUtility(factory=User, provided=IUser)
+    config.set_request_property("defpage.base.security.get_user", "user", reify=True)
 
     config.add_subscriber("defpage.base.layout.renderer_add_globals",
                           "pyramid.events.BeforeRender")
-    config.add_subscriber("defpage.lib.authentication.authenticate",
-                          "pyramid.events.NewRequest")
 
     # misc
     config.add_view("defpage.base.views.forbidden", "", context=Forbidden)

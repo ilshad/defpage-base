@@ -22,14 +22,14 @@ def search_collections(userid):
         return []
     raise ServiceCallError
 
-def create_collection(title, userid):
+def create_collection(userid, title):
     r,c = _call(userid, "/collections/", "POST", json.dumps({"title":title, "owner":userid}))
     if r.status == 201:
         r = json.loads(c)
         return r["id"]
     raise ServiceCallError
 
-def get_collection(cid, userid):
+def get_collection(userid, cid):
     r,c = _call(userid, "/collections/" + str(cid), "GET", None)
     if r.status == 200:
         return json.loads(c)
@@ -37,12 +37,12 @@ def get_collection(cid, userid):
         raise HTTPNotFound
     raise ServiceCallError
 
-def edit_collection(cid, userid, **kw):
+def edit_collection(userid, cid, **kw):
     r,c = _call(userid, "/collections/" + str(cid), "PUT", json.dumps(kw))
     if r.status != 204:
         raise ServiceCallError
 
-def delete_collection(cid, userid):
+def delete_collection(userid, cid):
     r,c = _call(userid, "/collections/" + str(cid), "DELETE", None)
     if r.status != 204:
         raise ServiceCallError
