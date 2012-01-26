@@ -12,5 +12,8 @@ def renderer_add_globals(e):
 
 def active_collection(req):
     if req.path_info_pop() == "collection":
-        return int(req.path_info_pop())
+        try:
+            return int(req.path_info_pop())
+        except:
+            None
     return None

@@ -7,8 +7,8 @@
 
       <div class="unified">
 	<div class="alt_label" style="color:#2967a5">Public collections</div>
-	Search for a public collections. You may add any public collection into your list and
-	remove at any time.
+	Search for a public collections. You may add any public collection into your
+	personal list below and remove at any time.
       </div>
 
     </metal:block>
