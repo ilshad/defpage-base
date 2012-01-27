@@ -15,4 +15,4 @@ defpage.base.egg-info
 bin/
 include/
 lib/
-
+local
