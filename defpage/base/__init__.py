@@ -6,6 +6,7 @@ from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from defpage.lib.authentication import UserInfoAuthenticationPolicy
 from defpage.lib.util import is_int
 from defpage.base.config import system_params
+from defpage.base.resources import get_root
 
 def main(global_config, **settings):
     system_params.update(settings)
@@ -14,7 +15,8 @@ def main(global_config, **settings):
     config = Configurator()
     config.setup_registry(settings=settings,
                           session_factory=session_factory,
-                          authentication_policy=authentication_policy)
+                          authentication_policy=authentication_policy,
+                          root_factory=get_root)
 
     config.set_request_property("defpage.base.security.get_user", "user", reify=True)
 
@@ -40,7 +42,8 @@ def main(global_config, **settings):
     # collection
     config.add_view("defpage.base.views.create_collection",
                     "create_collection",
-                    renderer="defpage.base:templates/collection/create.pt")
+                    renderer="defpage.base:templates/collection/create.pt",
+                    permission="create_collection")
 
     config.add_route("display_collection",
                      "/collection/{name}",
