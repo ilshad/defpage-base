@@ -39,10 +39,10 @@
 	      <td><input type="text" name="password" class="bold" style="width:100%;" value="enter password" onblur="if(this.value==''){this.value='enter password'; this.type='text';}" onfocus="if(this.value='enter password'){this.value=''; this.type='password';}" /></td>
 	    </tr>
 	    <tr>
-	      <td><input type="submit" name="submit" id="sign" value="log in" class="first fill" /></td>
+	      <td><input type="submit" name="submit" id="sign" value="log in" class="first fill" onclick="return $(this).validateForm({'login':'enter your email address', 'password':'enter password'});" /></td>
 	    </tr>
 	  </table>
-	</form>  
+	</form>
       </div>
     </div>
   </body>
