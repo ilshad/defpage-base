@@ -82,7 +82,7 @@ def source_overview(req):
         stype_id = req.POST.get("source_type_id")
         stype = get_stype(stype_id)
         if stype:
-            return HTTPFound(location=u"%s/collections/%s" % (stype["url"], cid))
+            return HTTPFound(location=u"%s/collection/%s" % (stype["url"], cid))
     return {"source":source, "source_types":stypes}
 
 def transmission_overview(req):
