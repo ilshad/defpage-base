@@ -90,8 +90,8 @@ def main(global_config, **settings):
                     renderer="defpage.base:templates/transmission/overview.pt")
 
     # public collections
-    config.add_view("defpage.base.views.public_overview",
-                    "public",
-                    renderer="defpage.base:templates/public/overview.pt")
+    #config.add_view("defpage.base.views.public_overview",
+    #                "public",
+    #                renderer="defpage.base:templates/public/overview.pt")
 
     return config.make_wsgi_app()
