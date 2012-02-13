@@ -2,6 +2,7 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from defpage.base.config import system_params
 from defpage.base import meta
+from defpage.base import apps
 
 def anonym_only(func):
     def wrapper(req):
@@ -69,7 +70,20 @@ def collection_roles(req):
     return {}
 
 def source_overview(req):
-    return {}
+    cid = req.matchdict["name"]
+    info = meta.get_collection(req.user.userid, cid)
+    source = len(info["sources"]) == 1 and info["sources"][0] or None
+    stypes  = apps.get_source_types()
+    def get_stype(k):
+        for i in stypes:
+            if i["id"] == k:
+                return i
+    if req.POST.get("setup_source"):
+        stype_id = req.POST.get("source_type_id")
+        stype = get_stype(stype_id)
+        if stype:
+            return HTTPFound(location=u"%s/setup?collection=%s" % (stype["url"], cid))
+    return {"source":source, "source_types":stypes}
 
 def transmission_overview(req):
     return {}

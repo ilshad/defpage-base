@@ -5,9 +5,22 @@
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <div class="unified">
-	<div class="alt_label">
-	  source
-	</div>
+	<tal:block condition="source is None">
+	  <div class="alt_label">
+	    There are currently no source specified for this collection
+	  </div>
+
+	  <form method="POST" action="${request.path_url}">
+	    <label for="external">Select source type</label>
+	    <select name="source_type_id">
+	      <tal:iteration repeat="i source_types">
+		<option tal:attributes="value i.id" tal:content="i.title" />
+	      </tal:iteration>
+	    </select>
+	    <input type="submit" name="setup_source" value="Continue" />
+	  </form>
+
+	</tal:block>
 	<a href="/collection/${active_collection_id}">back</a>
       </div>
     </metal:block>
