@@ -11,9 +11,9 @@
 	<table style="width:100%; margin:0;">
 	  <tr>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/properties">Properties</a></td>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/roles">Roles</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/source">Source</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/transmission">Transmission</a></td>
+	    <td style="width:20%"><a href="/collection/${active_collection_id}/roles">Roles</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/delete">Delete</a></td>
 	  </tr>
 	</table>
