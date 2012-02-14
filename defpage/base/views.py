@@ -78,12 +78,16 @@ def source_overview(req):
         for i in stypes:
             if i["id"] == k:
                 return i
+    configured = source and get_stype(source["type"])
     if req.POST.get("setup_source"):
-        stype_id = req.POST.get("source_type_id")
-        stype = get_stype(stype_id)
-        if stype:
-            return HTTPFound(location=u"%s/collection/%s" % (stype["url"], cid))
-    return {"source":source, "source_types":stypes}
+        if source:
+            url = configured["url"]
+        else:
+            stype_id = req.POST.get("source_type_id")
+            stype = get_stype(stype_id)
+            url = stype["url"]
+        return HTTPFound(location=u"%s/collection/%s" % (url, cid))
+    return {"source":source, "source_types":stypes, "configured":configured}
 
 def transmission_overview(req):
     return {}

@@ -7,9 +7,8 @@
       <div class="unified">
 	<tal:block condition="source is None">
 	  <div class="alt_label">
-	    There are currently no source specified for this collection
+	    There are currently no source specified for this collection.
 	  </div>
-
 	  <form method="POST" action="${request.path_url}">
 	    <label for="external">Select source type</label>
 	    <select name="source_type_id">
@@ -18,10 +17,20 @@
 	      </tal:iteration>
 	    </select>
 	    <input type="submit" name="setup_source" value="Continue" />
+	    <a href="/collection/${active_collection_id}">Cancel</a>
 	  </form>
-
 	</tal:block>
-	<a href="/collection/${active_collection_id}">back</a>
+
+	<tal:block condition="source is not None">
+	  <div class="alt_label">
+	    This collection has source ${configured['title']}.
+	  </div>
+	  <form method="POST" action="${request.path_url}">
+	    <input type="submit" name="setup_source" value="Manage source" />
+	    <a href="/collection/${active_collection_id}">Cancel</a>
+	  </form>
+	</tal:block>
+
       </div>
     </metal:block>
   </metal:block>
