@@ -89,6 +89,7 @@
 	  </div>
 	</div>
       </div>
+      <div id="ajax_loader">&nbsp;</div>
     </body>
   </metal:block>
 </html>
