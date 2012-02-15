@@ -38,7 +38,7 @@ def get_collection(userid, cid):
     raise ServiceCallError
 
 def edit_collection(userid, cid, **kw):
-    r,c = _call(userid, "/collections/" + str(cid), "PUT", json.dumps(kw))
+    r,c = _call(userid, "/collections/" + str(cid), "POST", json.dumps(kw))
     if r.status != 204:
         raise ServiceCallError
 
