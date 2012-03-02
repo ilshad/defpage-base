@@ -18,9 +18,23 @@
 	  </tr>
 	</table>
       </div>
+
       <div class="collection_info">
 	${len(info['documents'])} documents.
       </div>
+      
+      <div id="documents_listing">
+	<table style="width:100%;">
+	  <tr tal:repeat="doc info['documents']">
+	    <td style="width:300px; border-bottom:1px solid #ddd;">
+	      <a tal:attributes="href string:/document/${doc['id']}" class="document_item">
+		<div class="document_item_title" tal:content="doc['title']" />
+	      </a>
+	    </td>
+	  </tr>
+	</table>
+      </div>
+
     </metal:block>
   </metal:block>
 </html>
