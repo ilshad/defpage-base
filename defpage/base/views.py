@@ -1,4 +1,3 @@
-import json
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from defpage.base.config import system_params
@@ -48,7 +47,7 @@ def display_collection(req):
     info = meta.get_collection(req.user.userid, cid)
     documents = []
     for i in info["documents"]:
-        source = json.loads(i["source"])
+        source = i["source"]
         documents.append(
             {"id": i["id"],
              "title": i["title"],
