@@ -1,3 +1,4 @@
+import json
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from defpage.base.config import system_params
@@ -45,7 +46,23 @@ def create_collection(req):
 def display_collection(req):
     cid = req.matchdict["name"]
     info = meta.get_collection(req.user.userid, cid)
-    return {"info":info}
+    documents = []
+    for i in info["documents"]:
+        source = json.loads(i["source"])
+        documents.append(
+            {"id": i["id"],
+             "title": i["title"],
+             "source_css": source["type"] == "gd" and "source_css_gd"})
+    _source = len(info["sources"]) == 1 and info["sources"][0] or None
+    stypes  = apps.get_source_types()
+    def get_stype(k):
+        for i in stypes:
+            if i["id"] == k:
+                return i
+    source = _source and get_stype(_source["type"])
+    return {"title":info["title"],
+            "documents":documents,
+            "source_title":source and source["title"]}
 
 def delete_collection(req):
     cid = req.matchdict["name"]

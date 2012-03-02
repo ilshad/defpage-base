@@ -6,7 +6,7 @@
     <metal:block fill-slot="main">
       <div class="unified">
 	<div class="alt_label">
-	  ${info['title']}
+	  ${title}
 	</div>
 	<table style="width:100%; margin:0;">
 	  <tr>
@@ -19,20 +19,22 @@
 	</table>
       </div>
 
-      <div class="collection_info">
-	${len(info['documents'])} documents.
-      </div>
-      
+      <table class="collection_info" width="100%">
+	<tr>
+	  <td>${len(documents)} documents</td>
+	  <td>
+	    <tal:block condition="source_title">Collection source: ${source_title}</tal:block>
+	    <tal:block condition="not source_title">No source specified for this collection</tal:block>
+	  </td>
+	</tr>
+      </table>
+
       <div id="documents_listing">
-	<table style="width:100%;">
-	  <tr tal:repeat="doc info['documents']">
-	    <td style="width:300px; border-bottom:1px solid #ddd;">
-	      <a tal:attributes="href string:/document/${doc['id']}" class="document_item">
-		<div class="document_item_title" tal:content="doc['title']" />
-	      </a>
-	    </td>
-	  </tr>
-	</table>
+	<tal:block repeat="doc documents">
+	  <a href="#" onclick="return false;" tal:attributes="class string:document_item ${doc['source_css']}">
+	    <span class="document_item_title" tal:content="doc['title']" />
+	  </a>
+	</tal:block>
       </div>
 
     </metal:block>
