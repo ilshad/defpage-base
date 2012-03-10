@@ -52,7 +52,7 @@ def display_collection(req):
             {"id": i["id"],
              "title": i["title"],
              "source_css": source["type"] == "gd" and "source_css_gd"})
-    _source = len(info["sources"]) == 1 and info["sources"][0] or None
+    _source = info["sources"]
     stypes  = apps.get_source_types()
     def get_stype(k):
         for i in stypes:
@@ -88,7 +88,7 @@ def collection_roles(req):
 def source_overview(req):
     cid = req.matchdict["name"]
     info = meta.get_collection(req.user.userid, cid)
-    source = len(info["sources"]) == 1 and info["sources"][0] or None
+    source = info["sources"]
     stypes  = apps.get_source_types()
     def get_stype(k):
         for i in stypes:
