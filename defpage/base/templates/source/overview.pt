@@ -6,7 +6,7 @@
     <metal:block fill-slot="main">
       <div class="unified">
 	<tal:block condition="source is None">
-	  <div class="alt_label">
+	  <div class="">
 	    There are currently no source specified for this collection.
 	  </div>
 	  <form method="POST" action="${request.path_url}">
@@ -22,15 +22,22 @@
 	</tal:block>
 
 	<tal:block condition="source is not None">
-	  <div class="alt_label">
-	    This collection has source ${configured['title']}.
+	  <div class="">
+	    <tal:block condition="source[configured['special_attr']]">
+	      This collection has completely configured
+	      source ${configured['title']}.
+	    </tal:block>
+	    <tal:block condition="not source[configured['special_attr']]">
+	      This collection has source ${configured['title']},
+	      but it is not fully configured yet. Please, open "Manage source"
+	      and continue configuration.
+	    </tal:block>
 	  </div>
 	  <form method="POST" action="${request.path_url}">
 	    <input type="submit" name="setup_source" value="Manage source" />
 	    <a href="/collection/${active_collection_id}">Cancel</a>
 	  </form>
 	</tal:block>
-
       </div>
     </metal:block>
   </metal:block>
