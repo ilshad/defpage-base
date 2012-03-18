@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xml:lang="ru">
+      xml:lang="en">
   <metal:block define-macro="master">
     <head>
       <title>defpage</title>
@@ -21,6 +21,7 @@
       <script type="text/javascript" src="${static_url}/js/defpage.js"></script>
     </head>
     <body>
+      <em tal:content="request.environ" />
       <div tal:attributes="class string: container ${request.GET.get('x') and 'showgrid'}">
 	<div id="header" class="span-800">
 	  <div class="span-200">

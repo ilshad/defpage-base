@@ -37,7 +37,9 @@ def main(global_config, **settings):
     config.add_view("defpage.base.views.empty",
                     "error",
                     renderer="defpage.base:templates/error.pt")
-    config.add_view("defpage.base.views.default", "")
+
+    config.add_route("home", "/")
+    config.add_view("defpage.base.views.default", route_name="home")
 
     # collection
     config.add_view("defpage.base.views.create_collection",

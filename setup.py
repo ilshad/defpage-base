@@ -9,13 +9,11 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
     'pyramid',
-    'WebError',
+    'pyramid_debugtoolbar',
+    'waitress',
     'httplib2',
     'defpage.lib',
     ]
-
-if sys.version_info[:3] < (2,5,0):
-    requires.append('pysqlite')
 
 setup(name='defpage.base',
       version='0.1',
