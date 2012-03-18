@@ -21,7 +21,6 @@
       <script type="text/javascript" src="${static_url}/js/defpage.js"></script>
     </head>
     <body>
-      <em tal:content="request.environ" />
       <div tal:attributes="class string: container ${request.GET.get('x') and 'showgrid'}">
 	<div id="header" class="span-800">
 	  <div class="span-200">

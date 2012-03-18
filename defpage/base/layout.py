@@ -11,9 +11,10 @@ def renderer_add_globals(e):
     e["active_collection_id"] = active_collection(e["request"])
 
 def active_collection(req):
-    if req.path_info_pop() == "collection":
+    segments = req.path.split("/")
+    if segments[1] == "collection":
         try:
-            return int(req.path_info_pop())
+            return int(segments[2])
         except:
-            None
+            return None
     return None

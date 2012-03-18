@@ -18,11 +18,12 @@ def main(global_config, **settings):
                           authentication_policy=authentication_policy,
                           root_factory=get_root)
 
-    config.set_request_property("defpage.base.security.get_user", "user", reify=True)
+    config.set_request_property("defpage.base.security.get_user",
+                                "user",
+                                reify=True)
 
     config.add_subscriber("defpage.base.layout.renderer_add_globals",
                           "pyramid.events.BeforeRender")
-
     # misc
     config.add_view("defpage.base.views.forbidden",
                     "", context=Forbidden,
@@ -38,8 +39,7 @@ def main(global_config, **settings):
                     "error",
                     renderer="defpage.base:templates/error.pt")
 
-    config.add_route("home", "/")
-    config.add_view("defpage.base.views.default", route_name="home")
+    config.add_view("defpage.base.views.default", "")
 
     # collection
     config.add_view("defpage.base.views.create_collection",
