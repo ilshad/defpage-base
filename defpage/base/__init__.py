@@ -32,7 +32,7 @@ def main(global_config, **settings):
     config.add_view("defpage.base.views.unauthorized",
                     "", context=HTTPUnauthorized,
                     renderer="defpage.base:templates/unauthorized.pt")
-    config.add_view("defpage.base.views.empty", "",
+    config.add_view("defpage.base.views.notfound", "",
                     renderer="defpage.base:templates/notfound.pt",
                     context=NotFound)
     config.add_view("defpage.base.views.empty",

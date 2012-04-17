@@ -23,6 +23,10 @@ def unauthorized(req):
     req.response.status = 401
     return {}
 
+def notfound(req):
+    req.response.status = 404
+    return {}
+
 def default(req):
     if not req.user.authenticated:
         return render_to_response("defpage.base:templates/frontpage/unauthenticated.pt",
