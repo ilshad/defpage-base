@@ -54,6 +54,13 @@ def main(global_config, **settings):
                     route_name="display_collection",
                     renderer="defpage.base:templates/collection/display.pt")
 
+    config.add_route("get_collection_documents_ajax",
+                     "/collection/{name}/documents",
+                     custom_predicates=(is_int,))
+    config.add_view("defpage.base.ajax.get_collection_documents",
+                    route_name="get_collection_documents_ajax",
+                    renderer="json")
+
     config.add_route("collection_properties",
                      "/collection/{name}/properties",
                      custom_predicates=(is_int,))

@@ -49,13 +49,6 @@ def create_collection(req):
 def display_collection(req):
     cid = req.matchdict["name"]
     info = meta.get_collection(req.user.userid, cid)
-    documents = []
-    for i in info["documents"]:
-        source = i["source"]
-        documents.append(
-            {"id": i["id"],
-             "title": i["title"],
-             "source_css": source["type"] == "gd" and "source_css_gd"})
     _source = info["source"]
     stypes  = apps.get_source_types()
     def get_stype(k):
@@ -64,7 +57,7 @@ def display_collection(req):
                 return i
     source = _source and get_stype(_source["type"])
     return {"title":info["title"],
-            "documents":documents,
+            "length":info["length"],
             "source_title":source and source["title"]}
 
 def delete_collection(req):

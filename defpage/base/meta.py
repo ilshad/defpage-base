@@ -37,6 +37,14 @@ def get_collection(userid, cid):
         raise HTTPNotFound
     raise ServiceCallError
 
+def get_collection_documents(userid, cid):
+    r,c = _call(userid, "/collections/" + str(cid) + "/documents/", "GET", None)
+    if r.status == 200:
+        return json.loads(c)
+    elif r.status == 404:
+        raise HTTPNotFound
+    raise ServiceCallError
+
 def edit_collection(userid, cid, **kw):
     r,c = _call(userid, "/collections/" + str(cid), "POST", json.dumps(kw))
     if r.status != 204:

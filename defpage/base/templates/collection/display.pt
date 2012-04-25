@@ -1,7 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xml:lang="ru">
+<!DOCTYPE html>
+<html>
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <div class="unified">
@@ -21,7 +19,7 @@
 
       <table class="collection_info" width="100%">
 	<tr>
-	  <td>${len(documents)} documents</td>
+	  <td>${length} documents</td>
 	  <td>
 	    <tal:block condition="source_title">Collection source: ${source_title}</tal:block>
 	    <tal:block condition="not source_title">No source specified for this collection</tal:block>
@@ -29,13 +27,15 @@
 	</tr>
       </table>
 
+    <script id="template-fileitem" type="text/x-tmpl">
       <div id="documents_listing">
-	<tal:block repeat="doc documents">
-	  <a href="#" onclick="return false;" tal:attributes="class string:document_item ${doc['source_css']}">
-	    <span class="document_item_title" tal:content="doc['title']" />
-	  </a>
-	</tal:block>
+	{% for (var i=0; i<o.documents.length; i++) { %}
+	<a href="#" onclick="return false;" class="document_item {%=o.documents[i]['source_css']%}">
+	  <span class="document_item_title">{%=o.documents[i]['title']%}</span>
+	</a>
+	{% } %}
       </div>
+    </script>
 
     </metal:block>
   </metal:block>

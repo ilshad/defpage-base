@@ -1,16 +1,12 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xml:lang="ru">
+<!DOCTYPE html>
+<html>
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
-
       <div class="unified">
 	<div class="alt_label" style="color:#2967a5">Public collections</div>
 	Search for a public collections. You may add any public collection into your
 	personal list below and remove at any time.
       </div>
-
     </metal:block>
   </metal:block>
 </html>
