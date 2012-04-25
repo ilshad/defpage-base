@@ -19,7 +19,7 @@
 
       <table class="collection_info" width="100%">
 	<tr>
-	  <td>${length} documents</td>
+	  <td>${length} documents <a href="#" id="show_doclist" tal:condition="length >0">[ show ]</a></td>
 	  <td>
 	    <tal:block condition="source_title">Collection source: ${source_title}</tal:block>
 	    <tal:block condition="not source_title">No source specified for this collection</tal:block>
@@ -27,15 +27,31 @@
 	</tr>
       </table>
 
-    <script id="template-fileitem" type="text/x-tmpl">
-      <div id="documents_listing">
-	{% for (var i=0; i<o.documents.length; i++) { %}
+      <div id="documents_listing"></div>
+
+      <script id="template-doclist" type="text/x-tmpl">
+        <div style="text-align:right; padding-right:10px;">
+          <a href="#" id="close" onclick="$('#documents_listing').empty(); $('#show_doclist').show(); return false;">[ close ]</a>
+        </div>
+        {% for (var i=0; i<o.documents.length; i++) { %}
 	<a href="#" onclick="return false;" class="document_item {%=o.documents[i]['source_css']%}">
 	  <span class="document_item_title">{%=o.documents[i]['title']%}</span>
 	</a>
 	{% } %}
-      </div>
-    </script>
+      </script>
+
+      <script type="text/javascript">
+        $(function () {
+	    $("#show_doclist").click(function () {
+		var place = document.getElementById("documents_listing");
+		$.getJSON("/collection/${active_collection_id}/documents", {}, function (data) {
+		    place.innerHTML = tmpl("template-doclist", {"documents":data});
+		});
+		$(this).hide();
+		return false;
+	    });
+	});
+      </script>
 
     </metal:block>
   </metal:block>
