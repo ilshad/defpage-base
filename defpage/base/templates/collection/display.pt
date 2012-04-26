@@ -31,7 +31,7 @@
 
       <script id="template-doclist" type="text/x-tmpl">
         <div style="text-align:right; padding-right:10px;">
-          <a href="#" id="close" onclick="$('#documents_listing').empty(); $('#show_doclist').show(); return false;">[ close ]</a>
+          <a href="#" id="close" onclick="$('#documents_listing').empty(); $('#show_doclist').show(); return false;">[ hide ]</a>
         </div>
         {% for (var i=0; i<o.documents.length; i++) { %}
 	<a href="#" onclick="return false;" class="document_item {%=o.documents[i]['source_css']%}">
