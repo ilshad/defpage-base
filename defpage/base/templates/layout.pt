@@ -16,7 +16,7 @@
     </head>
     <body>
       <div tal:attributes="class string: container ${request.GET.get('x') and 'showgrid'}">
-	<div id="header" class="span-800">
+	<header id="header" class="span-800">
 	  <div class="span-200">
 	    <a href="/" id="logo"><span class="logo1">def</span><span class="logo2">page</span></a>
 	  </div>
@@ -34,9 +34,9 @@
 	      <a href="/" style="margin-right:10px;">Login</a>
 	    </tal:block>
 	  </div>
-	</div>
+	</header>
 	<div id="cleartop"></div>
-	<div class="span-200 first">
+	<nav class="span-200 first">
 	  <metal:block define-slot="sidebar">
 	    <tal:block condition="len(request.user.collections) > 0">
 	      <div class="collection_item">
@@ -64,7 +64,7 @@
 	    </tal:block>
 	    <tal:block condition="len(request.user.collections) == 0"></tal:block>
 	  </metal:block>
-	</div>
+	</nav>
 	<div class="span-600 last">
 	  <metal:block define-slot="messages">
 	    <tal:block repeat="item request.session.pop_flash()">
@@ -73,15 +73,15 @@
 	  </metal:block>
 	  <metal:block define-slot="main"></metal:block>
 	</div>
-	<div class="span-800" id="footer">
-	  <div class="span-400" id="addinfo">
+	<footer class="span-800" id="footer">
+	  <nav class="span-400" id="addinfo">
 	    <a href="${help_url}/about">About</a>
 	    <a href="${help_url}">Help</a>
-	  </div>
+	  </nav>
 	  <div class="span-400 last textalign-right" id="copyrights">
 	    <a href="/">defpage &copy; 2011</a>
 	  </div>
-	</div>
+	</footer>
       </div>
       <div id="ajax_loader">&nbsp;</div>
     </body>
