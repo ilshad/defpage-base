@@ -26,9 +26,10 @@
 	  </td>
 	</tr>
       </table>
-
       <div id="documents_listing"></div>
+    </metal:block>
 
+    <metal:block fill-slot="scripts">
       <script id="template-doclist" type="text/x-tmpl">
         <div style="text-align:right; padding-right:10px;">
           <a href="#" id="close" onclick="$('#documents_listing').empty(); $('#show_doclist').show(); return false;">[ hide ]</a>
@@ -52,7 +53,7 @@
 	    });
 	});
       </script>
-
     </metal:block>
+
   </metal:block>
 </html>
