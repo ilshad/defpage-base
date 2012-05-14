@@ -57,7 +57,7 @@
 		</a>
 	      </div>
 	      <div class="collection_item">
-		<a href="/create_collection" class="${request.path == '/create_collection' and 'selected' or ''} special">
+		<a href="/collection/+" class="${request.path == '/collection/+' and 'selected' or ''} special">
 		  Create new
 		</a>
 	      </div>

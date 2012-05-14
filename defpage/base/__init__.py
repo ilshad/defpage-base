@@ -42,8 +42,10 @@ def main(global_config, **settings):
     config.add_view("defpage.base.views.default", "")
 
     # collection
+    config.add_route("create_collection",
+                     "/collection/+")
     config.add_view("defpage.base.views.create_collection",
-                    "create_collection",
+                    route_name="create_collection",
                     renderer="defpage.base:templates/collection/create.pt",
                     permission="create_collection")
 

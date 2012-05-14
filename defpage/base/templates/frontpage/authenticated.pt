@@ -4,7 +4,7 @@
     <metal:block fill-slot="main">
       <div class="actions_master" tal:condition="len(request.user.collections) == 0">
 	You have not created any collections yet.<br />
-	<a href="/create_collection">Create new collection.</a>
+	<a href="/collection/+">Create new collection.</a>
       </div>
     </metal:block>
   </metal:block>
