@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <metal:block use-macro="layout.macros['master']">
+    <metal:block fill-slot="main">
+      <div class="unified">
+	<form method="POST" action="${request.path_url}">
+	  <div class="alt_label">Create REST API based transmission</div>
+	  <div class="row">
+	    <input type="url" name="base_url" id="base_url"
+		   style="width:100%"
+		   placeholder="Base URL" />
+	  </div>
+	  <div class="row">
+	    <label for="authentication_type">Authentication type</label>
+	  </div>
+	  <div class="row">
+	    <select name="authentication_type" id="authentication_type">
+	      <option value="x-secret">X-Secret header</option>
+	      <option value="basic">Basic HTTP Authentication</option>
+	      <option value="digest">Digest HTTP Authentication</option>
+	    </select>
+	  </div>
+	  <div id="authentication_params"></div>
+	  <div class="row">
+	    <input type="submit" name="setup_source" value="Continue" class="first" />
+	    <a href="/collection/${active_collection_id}/transmission">Back</a>
+	  </div>
+	</form>
+      </div>
+    </metal:block>
+    <metal:block fill-slot="scripts">
+
+      <script id="template-params-x-secret" type="text/x-tmpl">
+	<div class="row"><input type="text" name="x-secret" placeholder="Secret" /></div>
+      </script>
+
+      <script id="template-params-basic" type="text/x-tmpl">
+	<div class="row"><input type="text" name="username" placeholder="User name" /></div>
+	<div class="row"><input type="password" name="password" placeholder="Password" /></div>
+      </script>
+
+      <script id="template-params-digest" type="text/x-tmpl">
+	<div class="row"><input type="text" name="username" placeholder="User name" /></div>
+	<div class="row"><input type="password" name="password" placeholder="Password" /></div>
+      </script>
+
+      <script type="text/javascript">
+        (function() {
+	    function params_widget(id) {
+		document.getElementById('authentication_params').innerHTML = tmpl('template-params-' + id, {});
+	    };
+	    params_widget('x-secret');
+	    document.getElementById('authentication_type').onchange = function (e) {
+		e = window.event || e;
+		params_widget(e.target.value);
+	    };
+	}());
+      </script>
+    </metal:block>
+  </metal:block>
+</html>

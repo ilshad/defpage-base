@@ -8,7 +8,7 @@ class Root(object):
     __parent__ = None
 
     __acl__ = [
-        (Allow, Authenticated, "create_collection")
+        (Allow, Authenticated, "add_collection")
         ]
 
 root = Root()

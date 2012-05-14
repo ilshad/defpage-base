@@ -42,12 +42,12 @@ def main(global_config, **settings):
     config.add_view("defpage.base.views.default", "")
 
     # collection
-    config.add_route("create_collection",
+    config.add_route("add_collection",
                      "/collection/+")
-    config.add_view("defpage.base.views.create_collection",
-                    route_name="create_collection",
-                    renderer="defpage.base:templates/collection/create.pt",
-                    permission="create_collection")
+    config.add_view("defpage.base.views.add_collection",
+                    route_name="add_collection",
+                    renderer="defpage.base:templates/collection/add.pt",
+                    permission="add_collection")
 
     config.add_route("display_collection",
                      "/collection/{name}",
@@ -100,16 +100,11 @@ def main(global_config, **settings):
                     route_name="transmission_overview",
                     renderer="defpage.base:templates/transmission/overview.pt")
 
-    config.add_route("create_transmission",
-                     "/collection/{name}/create_transmission",
+    config.add_route("add_transmission_rest",
+                     "/collection/{name}/transmission/+/rest",
                      custom_predicates=(is_int,))
-    config.add_view("defpage.base.views.create_transmission",
-                    route_name="create_transmission",
-                    renderer="defpage.base:templates/transmission/create.pt")
-
-    # public collections
-    #config.add_view("defpage.base.views.public_overview",
-    #                "public",
-    #                renderer="defpage.base:templates/public/overview.pt")
+    config.add_view("defpage.base.views.add_transmission_rest",
+                    route_name="add_transmission_rest",
+                    renderer="defpage.base:templates/transmission/add_rest.pt")
 
     return config.make_wsgi_app()

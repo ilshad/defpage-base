@@ -37,7 +37,7 @@ def default(req):
     return render_to_response("defpage.base:templates/frontpage/authenticated.pt",
                               {}, request=req)
 
-def create_collection(req):
+def add_collection(req):
     if req.POST.get("submit"):
         title = req.POST.get("title", u"").strip()
         if not title:
@@ -111,8 +111,5 @@ def transmission_overview(req):
         return HTTPFound(location=u"/collection/%s/transmission/+/%s" % (cid, ttype_id))
     return {"transmission_types":TRANSMISSION_TYPES}
 
-def create_transmission(req):
-    return {}
-
-def public_overview(req):
+def add_transmission_rest(req):
     return {}
