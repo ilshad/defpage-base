@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <metal:block use-macro="layout.macros['master']">
+    <metal:block fill-slot="main">
+      <div class="unified">
+	<form method="POST" action="/collection/${active_collection_id}/create_transmission">
+	  <label for="external">Add new transmission</label>
+	  <input type="submit" name="setup_source" value="Continue" />
+	  <a href="/collection/${active_collection_id}">Back</a>
+	</form>
+      </div>
+    </metal:block>
+    <metal:block fill-slot="scripts">
+      
+    </metal:block>
+  </metal:block>
+</html>

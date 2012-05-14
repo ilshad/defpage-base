@@ -98,6 +98,13 @@ def main(global_config, **settings):
                     route_name="transmission_overview",
                     renderer="defpage.base:templates/transmission/overview.pt")
 
+    config.add_route("create_transmission",
+                     "/collection/{name}/create_transmission",
+                     custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.create_transmission",
+                    route_name="create_transmission",
+                    renderer="defpage.base:templates/transmission/create.pt")
+
     # public collections
     #config.add_view("defpage.base.views.public_overview",
     #                "public",

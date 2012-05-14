@@ -1,13 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <div class="unified">
-	<div class="alt_label">
-	  transmission
-	</div>
-	<a href="/collection/${active_collection_id}">back</a>
+	<form method="POST" action="${request.path_url}">
+	  <label for="external">Create transmission</label>
+	  <select name="transmission_type_id">
+	    <tal:iteration repeat="i transmission_types">
+	      <option tal:attributes="value i.id" tal:content="i.title" />
+	    </tal:iteration>
+	  </select>
+	  <input type="submit" name="create_transmission" value="Continue" />
+	  <a href="/collection/${active_collection_id}">Back</a>
+	</form>
       </div>
+    </metal:block>
+    <metal:block fill-slot="scripts">
+      
     </metal:block>
   </metal:block>
 </html>

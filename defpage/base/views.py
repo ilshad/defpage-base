@@ -1,6 +1,7 @@
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from defpage.base.config import system_params
+from defpage.base.transmission import TRANSMISSION_TYPES
 from defpage.base import meta
 from defpage.base import apps
 
@@ -103,6 +104,14 @@ def source_overview(req):
     return {"source":source, "source_types":stypes, "configured":configured}
 
 def transmission_overview(req):
+    cid = req.matchdict["name"]
+    info = meta.get_collection(req.user.userid, cid)
+    if req.POST.get("create_transmission"):
+        ttype_id = req.POST.get("transmission_type_id")
+        return HTTPFound(location=u"/collection/%s/transmission/+/%s" % (cid, ttype_id))
+    return {"transmission_types":TRANSMISSION_TYPES}
+
+def create_transmission(req):
     return {}
 
 def public_overview(req):

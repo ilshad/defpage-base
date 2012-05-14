@@ -1,12 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <div class="unified">
 	<tal:block condition="source is None">
-	  <div class="">
-	    There are currently no source specified for this collection.
-	  </div>
+	  <!--There are currently no source specified for this collection.-->
 	  <form method="POST" action="${request.path_url}">
 	    <label for="external">Select source type</label>
 	    <select name="source_type_id">

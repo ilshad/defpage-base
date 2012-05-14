@@ -5,4 +5,3 @@ def get_source_types():
          "url":"http://localhost:9020",
          "special_attr":"folder_id"}
         ]
-    
