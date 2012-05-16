@@ -17,23 +17,20 @@
 	</table>
       </div>
 
-      <div class="collection_info">
-	<ul>
-	  <li tal:condition="source_title">Collection source: ${source_title}</li>
-	  <li tal:condition="not source_title">No source specified for this collection</li>
-	  <li tal:condition="transmissions_len > 0">${transmissions_len} transmissions are configured</li>
-	  <li tal:condition="transmissions_len == 0">No transmissions specified for this collection</li>
-	  <li>${length} documents <a href="#" id="show_doclist" tal:condition="length >0">[ show ]</a>
-	    <a href="#" id="hide_doclist" style="display:none;">[ hide ]</a></li>
-	</ul>
-      </div>
+      <ul class="collection_info">
+	<li tal:condition="source_title">Collection source: ${source_title}</li>
+	<li tal:condition="not source_title">No source specified for this collection</li>
+	<li tal:condition="transmissions_len > 0">${transmissions_len} transmissions are configured</li>
+	<li tal:condition="transmissions_len == 0">No transmissions specified for this collection</li>
+	<li>${length} documents <a href="#" id="show_doclist" tal:condition="length >0">[ show ]</a>
+	  <a href="#" id="hide_doclist" style="display:none;">[ hide ]</a>
+	</li>
+      </ul>
       <div id="documents_listing"></div>
     </metal:block>
 
     <metal:block fill-slot="scripts">
       <script id="template-doclist" type="text/x-tmpl">
-        <div style="text-align:right; padding-right:10px;">
-        </div>
         {% for (var i=0; i<o.documents.length; i++) { %}
 	<a href="#" onclick="return false;" class="document_item {%=o.documents[i]['source_css']%}">
 	  <span class="document_item_title">{%=o.documents[i]['title']%}</span>
