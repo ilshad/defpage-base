@@ -26,7 +26,9 @@
 	  <a href="#" id="hide_doclist" style="display:none;">[ hide ]</a>
 	</li>
       </ul>
+
       <div id="documents_listing"></div>
+
     </metal:block>
 
     <metal:block fill-slot="scripts">
