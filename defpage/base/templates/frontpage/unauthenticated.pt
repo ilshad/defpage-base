@@ -1,45 +1,59 @@
 <!doctype html>
-<html>
-  <head>
-    <title>defpage</title>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="${static_url}/images/favicon.ico" />
-    <link rel="stylesheet" href="${static_url}/css/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="${static_url}/css/print.css" type="text/css" media="print" />
-    <!--[if lt IE 8]>
-	<link rel="stylesheet" href="${static_url}/css/ie.css" type="text/css" media="screen, projection">
-    <![endif]-->
-    <script type="text/javascript" src="${static_url}/js/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="${static_url}/js/jqplug.js"></script>
-    <script type="text/javascript" src="${static_url}/js/defpage.js"></script>
-  </head>
-  <body>
-    <div class="container big">
-      <a href="/"><img id="frontpage_logo" src="${static_url}/images/logo_verdana.png" id="frontpage_logo" width="600px" /></a>
-      <div class="clear"></div>
-      <tal:block repeat="item request.session.pop_flash()">
-	<div class="notice" tal:content="structure item" />
-      </tal:block>
-      <div class="description" style="width:250px;">
-	<div style="font-weight:bold; margin:9px 0 5px 0;"><a href="${signup_url}">Signup</a> for a defpage account!</div>
-	You're only several steps from transforming your existing cloud content into a powerful and secure CMS.
-	Click <a href="#examples" onclick="return false;" style="border-bottom:2px dotted #a52a2a; font-weight:bold;">here</a> to see how!
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+  <metal:block define-macro="master">
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <title>defpage</title>
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="${static_url}/images/favicon.ico" />
+      <link rel="apple-touch-icon" href="${static_url}/images/big_icon.png" />
+      <link rel="stylesheet" href="${static_url}/css/screen.css" type="text/css" media="screen, projection" />
+      <link rel="stylesheet" href="${static_url}/css/print.css" type="text/css" media="print" />
+      <!--[if lt IE 8]>
+	  <link rel="stylesheet" href="${static_url}/css/ie.css" type="text/css" media="screen, projection">
+      <![endif]-->
+      <script src="${static_url}/js/modernizr.js"></script>
+    </head>
+    <body>
+      <div class="container big">
+	<a href="/"><img id="frontpage_logo" src="${static_url}/images/logo_verdana.png" id="frontpage_logo" width="600px" /></a>
+	<div class="clear"></div>
+	<tal:block repeat="item request.session.pop_flash()">
+	  <div class="notice" tal:content="structure item" />
+	</tal:block>
+	<div class="description" style="width:250px;">
+	  <div style="font-weight:bold; margin:9px 0 5px 0;"><a href="${signup_url}">Signup</a> for a defpage account!</div>
+	  You're only several steps from transforming your existing cloud content into a powerful and secure CMS.
+	  Click <a href="#examples" onclick="return false;" style="border-bottom:2px dotted #a52a2a; font-weight:bold;">here</a> to see how!
+	</div>
+	<div style="float:left">
+	  <form name="fields" method="POST" action="${login_url}">
+	    <table style="width:325px;">
+	      <tr>
+		<td><input type="text" name="login" class="bold" style="width:100%;" value="enter your email address" onblur="if(this.value=='')this.value='enter your email address';" onfocus="if(this.value='enter your email address')this.value='';" /></td>
+	      </tr>
+	      <tr>
+		<td><input type="text" name="password" class="bold" style="width:100%;" value="enter password" onblur="if(this.value==''){this.value='enter password'; this.type='text';}" onfocus="if(this.value='enter password'){this.value=''; this.type='password';}" /></td>
+	      </tr>
+	      <tr>
+		<td><input type="submit" name="submit" id="sign" value="log in" class="first fill" onclick="return $(this).validateForm({'login':'enter your email address', 'password':'enter password'});" /></td>
+	      </tr>
+	    </table>
+	  </form>
+	</div>
       </div>
-      <div style="float:left">
-	<form name="fields" method="POST" action="${login_url}">
-	  <table style="width:325px;">
-	    <tr>
-	      <td><input type="text" name="login" class="bold" style="width:100%;" value="enter your email address" onblur="if(this.value=='')this.value='enter your email address';" onfocus="if(this.value='enter your email address')this.value='';" /></td>
-	    </tr>
-	    <tr>
-	      <td><input type="text" name="password" class="bold" style="width:100%;" value="enter password" onblur="if(this.value==''){this.value='enter password'; this.type='text';}" onfocus="if(this.value='enter password'){this.value=''; this.type='password';}" /></td>
-	    </tr>
-	    <tr>
-	      <td><input type="submit" name="submit" id="sign" value="log in" class="first fill" onclick="return $(this).validateForm({'login':'enter your email address', 'password':'enter password'});" /></td>
-	    </tr>
-	  </table>
-	</form>
-      </div>
-    </div>
-  </body>
+      <div id="ajax_loader">&nbsp;</div>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+      <script>!window.jQuery && document.write(unescape('%3Cscript src="${static_url}/js/jquery-1.7.2.min.js"%3E%3C/script%3E'))</script>
+      <script type="text/javascript" src="${static_url}/js/libs.js"></script>
+      <script type="text/javascript" src="${static_url}/js/defpage.js"></script>
+      <metal:block define-slot="scripts"></metal:block>
+    </body>
 </html>

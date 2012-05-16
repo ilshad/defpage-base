@@ -8,25 +8,25 @@
 	</div>
 	<table style="width:100%; margin:0;">
 	  <tr>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/properties">Properties</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/source">Source</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/transmission">Transmission</a></td>
+	    <td style="width:20%"><a href="/collection/${active_collection_id}/properties">Properties</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/roles">Roles</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/delete">Delete</a></td>
 	  </tr>
 	</table>
       </div>
 
-      <table class="collection_info" width="100%">
-	<tr>
-	  <td>${length} documents <a href="#" id="show_doclist" tal:condition="length >0">[ show ]</a></td>
-	  <td>
-	    <tal:block condition="source_title">Collection source: ${source_title}</tal:block>
-	    <tal:block condition="not source_title">No source specified for this collection</tal:block>
-	  </td>
-	</tr>
-      </table>
-      <div id="documents_listing"></div>
+      <div class="collection_info" width="100%">
+	<ul>
+	  <li tal:condition="source_title">Collection source: ${source_title}</li>
+	  <li tal:condition="not source_title">No source specified for this collection</li>
+	  <li tal:condition="transmissions_len > 0">${transmissions_len} transmissions are configured</li>
+	  <li tal:condition="transmissions_len == 0">No transmissions specified for this collection</li>
+	  <li>${length} documents <a href="#" id="show_doclist" tal:condition="length >0">[ show ]</a></li>
+	</ul>
+      </div>
+	<div id="documents_listing"></div>
     </metal:block>
 
     <metal:block fill-slot="scripts">

@@ -11,13 +11,12 @@
 		   placeholder="Base URL" />
 	  </div>
 	  <div class="row">
-	    <label for="authentication_type">Authentication type</label>
+	    <label for="authentication_type">Authentication</label>
 	  </div>
 	  <div class="row">
 	    <select name="authentication_type" id="authentication_type">
 	      <option value="x-secret">X-Secret header</option>
 	      <option value="basic">Basic HTTP Authentication</option>
-	      <option value="digest">Digest HTTP Authentication</option>
 	    </select>
 	  </div>
 	  <div id="authentication_params"></div>
@@ -35,11 +34,6 @@
       </script>
 
       <script id="template-params-basic" type="text/x-tmpl">
-	<div class="row"><input type="text" name="username" placeholder="User name" /></div>
-	<div class="row"><input type="password" name="password" placeholder="Password" /></div>
-      </script>
-
-      <script id="template-params-digest" type="text/x-tmpl">
 	<div class="row"><input type="text" name="username" placeholder="User name" /></div>
 	<div class="row"><input type="password" name="password" placeholder="Password" /></div>
       </script>

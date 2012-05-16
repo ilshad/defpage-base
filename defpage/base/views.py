@@ -59,7 +59,8 @@ def display_collection(req):
     source = _source and get_stype(_source["type"])
     return {"title":info["title"],
             "length":info["length"],
-            "source_title":source and source["title"]}
+            "source_title":source and source["title"],
+            "transmissions_len":len(info["transmissions"])}
 
 def delete_collection(req):
     cid = req.matchdict["name"]
