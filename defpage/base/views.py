@@ -110,7 +110,8 @@ def transmission_overview(req):
     if req.POST.get("create_transmission"):
         ttype_id = req.POST.get("transmission_type_id")
         return HTTPFound(location=u"/collection/%s/transmission/+/%s" % (cid, ttype_id))
-    return {"transmission_types":TRANSMISSION_TYPES}
+    return {"transmission_types":TRANSMISSION_TYPES,
+            "transmissions":meta.get_collection_transmissions(req.user.userid, cid)}
 
 def add_transmission_rest(req):
     cid = req.matchdict["name"]
