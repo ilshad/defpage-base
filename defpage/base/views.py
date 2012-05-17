@@ -113,4 +113,15 @@ def transmission_overview(req):
     return {"transmission_types":TRANSMISSION_TYPES}
 
 def add_transmission_rest(req):
+    cid = req.matchdict["name"]
+    if req.POST.get("submit"):
+        url = req.POST.get("base_url")
+        atype = req.POST.get("authentication_type")
+        xsecret = req.POST.get("x-secret")
+        username = req.POST.get("auth_username")
+        password = req.POST.get("auth_password")
+        if url and atype == "x-secret" and xsecret:
+            meta.create_transmission(req.user.userid, cid, url,
+                                     athentication_type=atype,
+                                     x_secret=xsecret)
     return {}

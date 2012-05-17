@@ -15,8 +15,6 @@
 	</form>
       </div>
     </metal:block>
-    <metal:block fill-slot="scripts">
-      
-    </metal:block>
+    <metal:block fill-slot="scripts"></metal:block>
   </metal:block>
 </html>

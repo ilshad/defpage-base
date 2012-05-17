@@ -7,8 +7,8 @@
 	  <div class="alt_label">Create REST API based transmission</div>
 	  <div class="row">
 	    <input type="url" name="base_url" id="base_url"
-		   style="width:100%"
-		   placeholder="Base URL" />
+		   style="width:100%" placeholder="Base URL"
+		   value="${req.POST.get('base_url')}" required />
 	  </div>
 	  <div class="row">
 	    <label for="authentication_type">Authentication</label>
@@ -21,7 +21,7 @@
 	  </div>
 	  <div id="authentication_params"></div>
 	  <div class="row">
-	    <input type="submit" name="setup_source" value="Continue" class="first" />
+	    <input type="submit" name="submit" value="Continue" class="first" />
 	    <a href="/collection/${active_collection_id}/transmission">Back</a>
 	  </div>
 	</form>
@@ -30,12 +30,12 @@
     <metal:block fill-slot="scripts">
 
       <script id="template-params-x-secret" type="text/x-tmpl">
-	<div class="row"><input type="text" name="x-secret" placeholder="Secret" /></div>
+	<div class="row"><input type="text" name="x-secret" placeholder="Secret" required /></div>
       </script>
 
       <script id="template-params-basic" type="text/x-tmpl">
-	<div class="row"><input type="text" name="username" placeholder="User name" /></div>
-	<div class="row"><input type="password" name="password" placeholder="Password" /></div>
+	<div class="row"><input type="text" name="auth_username" placeholder="User name" required /></div>
+	<div class="row"><input type="text" name="auth_password" placeholder="Password" required /></div>
       </script>
 
       <script type="text/javascript">
