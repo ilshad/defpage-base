@@ -58,9 +58,9 @@ def display_collection(req):
                 return i
     source = _source and get_stype(_source["type"])
     return {"title":info["title"],
-            "length":info["length"],
             "source_title":source and source["title"],
-            "transmissions_len":len(info["transmissions"])}
+            "count_documents":info["count_documents"],
+            "count_transmissions":info["count_transmissions"]}
 
 def delete_collection(req):
     cid = req.matchdict["name"]
@@ -117,11 +117,11 @@ def add_transmission_rest(req):
     if req.POST.get("submit"):
         url = req.POST.get("base_url")
         atype = req.POST.get("authentication_type")
-        xsecret = req.POST.get("x-secret")
+        secret = req.POST.get("auth_secret")
         username = req.POST.get("auth_username")
         password = req.POST.get("auth_password")
-        if url and atype == "x-secret" and xsecret:
-            meta.create_transmission(req.user.userid, cid, url,
-                                     athentication_type=atype,
-                                     x_secret=xsecret)
+        if url and atype == "x-secret" and secret:
+            meta.create_transmission_rest(req.user.userid, cid, url,
+                                          athentication_type=atype,
+                                          secret=secret)
     return {}

@@ -6,7 +6,12 @@
 	<form method="POST" action="${request.path_url}">
 	  <div class="alt_label">Create REST API based transmission</div>
 	  <div class="row">
-	    <input type="url" name="base_url" id="base_url"
+	    <input type="text" name="description"
+		   style="width:100%" placeholder="Description"
+		   value="${req.POST.get('description')}" required />
+	  </div>
+	  <div class="row">
+	    <input type="url" name="base_url"
 		   style="width:100%" placeholder="Base URL"
 		   value="${req.POST.get('base_url')}" required />
 	  </div>
@@ -30,7 +35,7 @@
     <metal:block fill-slot="scripts">
 
       <script id="template-params-x-secret" type="text/x-tmpl">
-	<div class="row"><input type="text" name="x-secret" placeholder="Secret" required /></div>
+	<div class="row"><input type="text" name="auth_secret" placeholder="Secret" required /></div>
       </script>
 
       <script id="template-params-basic" type="text/x-tmpl">

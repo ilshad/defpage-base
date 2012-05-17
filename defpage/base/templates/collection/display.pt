@@ -20,9 +20,9 @@
       <ul class="collection_info">
 	<li tal:condition="source_title">Collection source: ${source_title}</li>
 	<li tal:condition="not source_title">No source specified for this collection</li>
-	<li tal:condition="transmissions_len > 0">${transmissions_len} transmissions are configured</li>
-	<li tal:condition="transmissions_len == 0">No transmissions specified for this collection</li>
-	<li>${length} documents <a href="#" id="show_doclist" tal:condition="length >0">[ show ]</a>
+	<li tal:condition="count_transmissions > 0">${count_transmissions} transmissions are configured</li>
+	<li tal:condition="count_transmissions == 0">No transmissions specified for this collection</li>
+	<li>${count_documents} documents <a href="#" id="show_doclist" tal:condition="count_documents > 0">[ show ]</a>
 	  <a href="#" id="hide_doclist" style="display:none;">[ hide ]</a>
 	</li>
       </ul>
