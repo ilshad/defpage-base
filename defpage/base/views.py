@@ -115,13 +115,18 @@ def transmission_overview(req):
 def add_transmission_rest(req):
     cid = req.matchdict["name"]
     if req.POST.get("submit"):
+        description = req.POST.get("description")
         url = req.POST.get("base_url")
         atype = req.POST.get("authentication_type")
         secret = req.POST.get("auth_secret")
         username = req.POST.get("auth_username")
         password = req.POST.get("auth_password")
         if url and atype == "x-secret" and secret:
-            meta.create_transmission_rest(req.user.userid, cid, url,
-                                          athentication_type=atype,
-                                          secret=secret)
+            data = {"type":"rest",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"x-secret",
+                                                "secret":secret}}}
+            meta.create_transmission(req.user.userid, cid, data)
+            return HTTPFound(location=u"/collection/%s/transmission" % cid)
     return {}

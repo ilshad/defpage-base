@@ -55,5 +55,7 @@ def delete_collection(userid, cid):
     if r.status != 204:
         raise ServiceCallError
 
-def create_transmission_rest(userid, cid, url, **kw):
-    pass
+def create_transmission(userid, cid, data):
+    r,c = _call(userid, "/collections/"+str(cid)+"/transmissions/", "POST", json.dumps(data))
+    if r.status != 204:
+        raise ServiceCallError
