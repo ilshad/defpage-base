@@ -122,6 +122,7 @@ def add_transmission_rest(req):
         secret = req.POST.get("auth_secret")
         username = req.POST.get("auth_username")
         password = req.POST.get("auth_password")
+        data = None
         if url and atype == "x-secret" and secret:
             data = {"type":"rest",
                     "description":description,
@@ -135,8 +136,6 @@ def add_transmission_rest(req):
                               "authentication":{"type":"basic",
                                                 "username":username,
                                                 "password":password}}}
-        else:
-            data = None
         if data:
             meta.create_transmission(req.user.userid, cid, data)
             return HTTPFound(location=u"/collection/%s/transmission" % cid)
