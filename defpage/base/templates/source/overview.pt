@@ -13,7 +13,7 @@
 	      </tal:iteration>
 	    </select>
 	    <input type="submit" name="setup_source" value="Continue" />
-	    <a href="/collection/${active_collection_id}">Cancel</a>
+	    <a href="/collection/${active_collection_id}">Close</a>
 	  </form>
 	</tal:block>
 
@@ -31,7 +31,7 @@
 	  </div>
 	  <form method="POST" action="${request.path_url}">
 	    <input type="submit" name="setup_source" value="Manage source" />
-	    <a href="/collection/${active_collection_id}">Cancel</a>
+	    <a href="/collection/${active_collection_id}">Close</a>
 	  </form>
 	</tal:block>
       </div>

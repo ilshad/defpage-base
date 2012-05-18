@@ -9,7 +9,7 @@
 	</div>
 	<div class="row">
 	  <input type="submit" name="submit" value="Save changes" class="first" style="margin-top:5px;" />
-	  <a href="/collection/${active_collection_id}" class="last">Cancel</a>
+	  <a href="/collection/${active_collection_id}" class="last">Close</a>
 	</div>
       </form>
     </metal:block>

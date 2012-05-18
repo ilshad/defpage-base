@@ -11,7 +11,7 @@
 	    </tal:iteration>
 	  </select>
 	  <input type="submit" name="create_transmission" value="Continue" />
-	  <a href="/collection/${active_collection_id}">Back</a>
+	  <a href="/collection/${active_collection_id}">Close</a>
 	</form>
       </div>
       <ul>
