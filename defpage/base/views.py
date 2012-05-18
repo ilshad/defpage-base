@@ -128,6 +128,16 @@ def add_transmission_rest(req):
                     "params":{"url":url,
                               "authentication":{"type":"x-secret",
                                                 "secret":secret}}}
+        if url and atype == "basic" and username and password:
+            data = {"type":"rest",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"basic",
+                                                "username":username,
+                                                "password":password}}}
+        else:
+            data = None
+        if data:
             meta.create_transmission(req.user.userid, cid, data)
             return HTTPFound(location=u"/collection/%s/transmission" % cid)
     return {}
