@@ -2,6 +2,7 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import render_to_response
 from defpage.base.config import system_params
 from defpage.base.transmission import TRANSMISSION_TYPES
+from defpage.base.transmission import get_transmission_title
 from defpage.base import meta
 from defpage.base import apps
 
@@ -111,6 +112,7 @@ def transmission_overview(req):
         ttype_id = req.POST.get("transmission_type_id")
         return HTTPFound(location=u"/collection/%s/transmission/+/%s" % (cid, ttype_id))
     return {"transmission_types":TRANSMISSION_TYPES,
+            "get_transmission_title":get_transmission_title,
             "transmissions":meta.get_collection_transmissions(req.user.userid, cid)}
 
 def add_transmission_rest(req):

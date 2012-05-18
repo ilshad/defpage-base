@@ -14,12 +14,18 @@
 	  <a href="/collection/${active_collection_id}">Close</a>
 	</form>
       </div>
-      <ul>
-	<li tal:repeat="item transmissions">
-	  <a tal:attributes="href string:/collection/${active_collection_id}/transmission/${item.id}"
-	     tal:content="item.description" />
-	</li>
-      </ul>
+      <table class="transmissions_listing" tal:condition="len(transmissions) > 0">
+	<tbody>
+	  <tr tal:repeat="item transmissions">
+	    <td>
+	      <a tal:attributes="href string:/collection/${active_collection_id}/transmission/${item.id}/edit"
+		 tal:content="item.description" />
+	    </td>
+	    <td><time title="Last run time">2011-11-12 14:54</time></td>
+	    <td class="quiet" tal:content="get_transmission_title(item.type)" />
+	  </tr>
+	</tbody>
+      </table>
     </metal:block>
     <metal:block fill-slot="scripts"></metal:block>
   </metal:block>
