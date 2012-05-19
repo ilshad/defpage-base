@@ -4,7 +4,7 @@
     <metal:block fill-slot="main">
       <div class="unified">
 	<form method="POST" action="${request.path_url}">
-	  <div class="alt_label">Create REST API based transmission</div>
+	  <div class="alt_label">Create Dirty API based transmission</div>
 	  <div class="row">
 	    <input type="text" name="description"
 		   style="width:100%" placeholder="Description"
@@ -12,7 +12,7 @@
 	  </div>
 	  <div class="row">
 	    <input type="url" name="url"
-		   style="width:100%" placeholder="Base URL"
+		   style="width:100%" placeholder="URL"
 		   value="${req.POST.get('url')}" required />
 	  </div>
 	  <div class="row">

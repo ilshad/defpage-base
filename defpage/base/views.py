@@ -116,11 +116,28 @@ def transmissions_overview(req):
             "get_transmission_title":get_transmission_title,
             "transmissions":meta.get_collection_transmissions(req.user.userid, cid)}
 
-def add_transmission_rest(req):
+def transmission_display(req):
+    tid = req.matchdict["transmission_id"]
+    o = meta.get_transmission(req.user.userid, req.matchdict['name'], tid)
+    return {"description":o["description"],
+            "transmission_id":tid,
+            "type_id":o["type"]}
+
+def transmission_delete(req):
+    cid = req.matchdict['name']
+    tid = req.matchdict["transmission_id"]
+    o = meta.get_transmission(req.user.userid, cid, tid)
+    if req.POST.get("submit"):
+        if req.POST.get("confirm"):
+            meta.delete_transmission(req.user.userid, cid, tid)
+            return HTTPFound(location="/collection/%s/transmission" % cid)
+    return {"description":o["description"]}
+
+def transmission_add_rest(req):
     cid = req.matchdict["name"]
     if req.POST.get("submit"):
         description = req.POST.get("description")
-        url = req.POST.get("base_url")
+        url = req.POST.get("url")
         atype = req.POST.get("authentication_type")
         secret = req.POST.get("auth_secret")
         username = req.POST.get("auth_username")
@@ -144,23 +161,6 @@ def add_transmission_rest(req):
             return HTTPFound(location=u"/collection/%s/transmission" % cid)
     return {}
 
-def transmission_display(req):
-    tid = req.matchdict["transmission_id"]
-    o = meta.get_transmission(req.user.userid, req.matchdict['name'], tid)
-    return {"description":o["description"],
-            "transmission_id":tid,
-            "type_id":o["type"]}
-
-def transmission_delete(req):
-    cid = req.matchdict['name']
-    tid = req.matchdict["transmission_id"]
-    o = meta.get_transmission(req.user.userid, cid, tid)
-    if req.POST.get("submit"):
-        if req.POST.get("confirm"):
-            meta.delete_transmission(req.user.userid, cid, tid)
-            return HTTPFound(location="/collection/%s/transmission" % cid)
-    return {"description":o["description"]}
-
 def transmission_edit_rest(req):
     cid = req.matchdict['name']
     tid = req.matchdict["transmission_id"]
@@ -169,7 +169,7 @@ def transmission_edit_rest(req):
         raise HTTPNotFound
     if req.POST.get("submit"):
         description = req.POST.get("description")
-        url = req.POST.get("base_url")
+        url = req.POST.get("url")
         atype = req.POST.get("authentication_type")
         secret = req.POST.get("auth_secret")
         username = req.POST.get("auth_username")
@@ -183,6 +183,68 @@ def transmission_edit_rest(req):
                                                 "secret":secret}}}
         if url and atype == "basic" and username and password:
             data = {"type":"rest",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"basic",
+                                                "username":username,
+                                                "password":password}}}
+        if data:
+            meta.put_transmission(req.user.userid, cid, tid, data)
+            return HTTPFound(location=u"/collection/%s/transmission/%s" % (cid, tid))
+    return {"description":o["description"],
+            "url":o["params"]["url"],
+            "auth":o["params"]["authentication"]}
+
+def transmission_add_dirty(req):
+    cid = req.matchdict["name"]
+    if req.POST.get("submit"):
+        description = req.POST.get("description")
+        url = req.POST.get("url")
+        atype = req.POST.get("authentication_type")
+        secret = req.POST.get("auth_secret")
+        username = req.POST.get("auth_username")
+        password = req.POST.get("auth_password")
+        data = None
+        if url and atype == "x-secret" and secret:
+            data = {"type":"dirty",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"x-secret",
+                                                "secret":secret}}}
+        if url and atype == "basic" and username and password:
+            data = {"type":"dirty",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"basic",
+                                                "username":username,
+                                                "password":password}}}
+        if data:
+            meta.create_transmission(req.user.userid, cid, data)
+            return HTTPFound(location=u"/collection/%s/transmission" % cid)
+    return {}
+
+def transmission_edit_dirty(req):
+    cid = req.matchdict['name']
+    tid = req.matchdict["transmission_id"]
+    o = meta.get_transmission(req.user.userid, cid, tid)
+    if o["type"] != "dirty":
+        raise HTTPNotFound
+    if req.POST.get("submit"):
+        description = req.POST.get("description")
+        url = req.POST.get("url")
+        atype = req.POST.get("authentication_type")
+        secret = req.POST.get("auth_secret")
+        username = req.POST.get("auth_username")
+        password = req.POST.get("auth_password")
+        data = None
+        if url and atype == "x-secret" and secret:
+            data = {"type":"dirty",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"x-secret",
+                                                "secret":secret}}}
+        if url and atype == "basic" and username and password:
+            data = {"type":"dirty",
                     "description":description,
                     "params":{"url":url,
                               "authentication":{"type":"basic",

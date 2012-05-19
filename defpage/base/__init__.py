@@ -100,13 +100,6 @@ def main(global_config, **settings):
                     route_name="transmissions_overview",
                     renderer="defpage.base:templates/transmission/overview.pt")
 
-    config.add_route("add_transmission_rest",
-                     "/collection/{name}/transmission/+/rest",
-                     custom_predicates=(is_int,))
-    config.add_view("defpage.base.views.add_transmission_rest",
-                    route_name="add_transmission_rest",
-                    renderer="defpage.base:templates/transmission/add_rest.pt")
-
     config.add_route("transmission_display",
                      "/collection/{name}/transmission/{transmission_id}",
                      custom_predicates=(is_int,))
@@ -121,11 +114,32 @@ def main(global_config, **settings):
                     route_name="transmission_delete",
                     renderer="defpage.base:templates/transmission/delete.pt")
 
+    config.add_route("transmission_add_rest",
+                     "/collection/{name}/transmission/+/rest",
+                     custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.transmission_add_rest",
+                    route_name="transmission_add_rest",
+                    renderer="defpage.base:templates/transmission/add_rest.pt")
+
+    config.add_route("transmission_add_dirty",
+                     "/collection/{name}/transmission/+/dirty",
+                     custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.transmission_add_dirty",
+                    route_name="transmission_add_dirty",
+                    renderer="defpage.base:templates/transmission/add_dirty.pt")
+
     config.add_route("transmission_edit_rest",
-                     "/collection/{name}/transmission/{transmission_id}/edit_rest",
+                     "/collection/{name}/transmission/{transmission_id}/edit/rest",
                      custom_predicates=(is_int,))
     config.add_view("defpage.base.views.transmission_edit_rest",
                     route_name="transmission_edit_rest",
                     renderer="defpage.base:templates/transmission/edit_rest.pt")
+
+    config.add_route("transmission_edit_dirty",
+                     "/collection/{name}/transmission/{transmission_id}/edit/dirty",
+                     custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.transmission_edit_dirty",
+                    route_name="transmission_edit_dirty",
+                    renderer="defpage.base:templates/transmission/edit_dirty.pt")
 
     return config.make_wsgi_app()
