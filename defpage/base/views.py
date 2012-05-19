@@ -147,6 +147,20 @@ def transmission_display(req):
     tid = req.matchdict["transmission_id"]
     o = meta.get_transmission(req.user.userid, req.matchdict['name'], tid)
     return {"description":o["description"],
-            "transmission_id":tid}
+            "transmission_id":tid,
+            "type_id":o["type"]}
 
-            
+def transmission_edit_rest(req):
+    tid = req.matchdict["transmission_id"]
+    o = meta.get_transmission(req.user.userid, req.matchdict['name'], tid)
+    return {}
+
+def transmission_delete(req):
+    cid = req.matchdict['name']
+    tid = req.matchdict["transmission_id"]
+    o = meta.get_transmission(req.user.userid, cid, tid)
+    if req.POST.get("submit"):
+        if req.POST.get("confirm"):
+            meta.delete_transmission(req.user.userid, cid, tid)
+            return HTTPFound(location="/collection/%s/transmission" % cid)
+    return {"description":o["description"]}

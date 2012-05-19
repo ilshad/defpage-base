@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <metal:block use-macro="layout.macros['master']">
+    <metal:block fill-slot="main">
+      <form class="unified" method="POST" tal:attributes="action python:request.path_url">
+	<div class="form_label" style="color:red">Delete transmission "${description}"</div>
+	<div class="row">
+	  <label for="confirm" style="display:inline; vertical-align:top;">Confirm delete transmission</label>
+	  <input type="checkbox" name="confirm" style="vertical-align:top;">
+	</div>
+	<div class="row">
+	  <input type="submit" name="submit" value="Delete!" class="first" style="margin-top:5px;" />
+	  <a href="/collection/${active_collection_id}/transmission" class="last">Cancel</a>
+	</div>
+      </form>
+    </metal:block>
+  </metal:block>
+</html>

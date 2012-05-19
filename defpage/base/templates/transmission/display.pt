@@ -9,7 +9,7 @@
 	<table style="width:100%; margin:0;">
 	  <tr>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/transmission">Close</a></td>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/transmission/${transmission_id}/edit">Edit</a></td>
+	    <td style="width:20%"><a href="/collection/${active_collection_id}/transmission/${transmission_id}/edit_${type_id}">Edit</a></td>
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/transmission/${transmission_id}/delete">Delete</a></td>
 	  </tr>
 	</table>

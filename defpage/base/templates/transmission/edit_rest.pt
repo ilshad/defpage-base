@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <metal:block use-macro="layout.macros['master']">
+    <metal:block fill-slot="main">
+      <div class="unified">
+	<form method="POST" action="${request.path_url}">
+	  <div class="row">
+	    <input type="text" name="description"
+		   style="width:100%"
+		   value="${transmission['description']}" required />
+	  </div>
+	  <div class="row">
+	    <input type="url" name="base_url"
+		   style="width:100%"
+		   value="${transmission['params']['url']}" required />
+	  </div>
+	  <div class="row">
+	    <label for="authentication_type">Authentication</label>
+	  </div>
+	  <div class="row">
+	    <select name="authentication_type" id="authentication_type">
+	      <option value="x-secret">X-Secret header</option>
+	      <option value="basic">Basic HTTP Authentication</option>
+	    </select>
+	  </div>
+	  <div id="authentication_params"></div>
+	  <div class="row">
+	    <input type="submit" name="submit" value="Continue" class="first" />
+	    <a href="/collection/${active_collection_id}/transmission">Close</a>
+	  </div>
+	</form>
+      </div>
+    </metal:block>
+    <metal:block fill-slot="scripts">
+
+      <script id="template-params-x-secret" type="text/x-tmpl">
+	<div class="row"><input type="text" name="auth_secret" placeholder="Secret" required /></div>
+      </script>
+
+      <script id="template-params-basic" type="text/x-tmpl">
+	<div class="row"><input type="text" name="auth_username" placeholder="User name" required /></div>
+	<div class="row"><input type="text" name="auth_password" placeholder="Password" required /></div>
+      </script>
+
+      <script type="text/javascript">
+        (function() {
+	    function params_widget(id) {
+		document.getElementById('authentication_params').innerHTML = tmpl('template-params-' + id, {});
+	    };
+	    params_widget(${transmission['params']['authentication]['type']}');
+	    document.getElementById('authentication_type').onchange = function (e) {
+		e = window.event || e;
+		params_widget(e.target.value);
+	    };
+	}());
+      </script>
+    </metal:block>
+  </metal:block>
+</html>
