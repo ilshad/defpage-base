@@ -5,14 +5,10 @@
       <div class="unified">
 	<form method="POST" action="${request.path_url}">
 	  <div class="row">
-	    <input type="text" name="description"
-		   style="width:100%"
-		   value="${transmission['description']}" required />
+	    <input type="text" name="description" style="width:100%" value="${description}" required />
 	  </div>
 	  <div class="row">
-	    <input type="url" name="base_url"
-		   style="width:100%"
-		   value="${transmission['params']['url']}" required />
+	    <input type="url" name="base_url" style="width:100%" value="${url}" required />
 	  </div>
 	  <div class="row">
 	    <label for="authentication_type">Authentication</label>
@@ -34,20 +30,36 @@
     <metal:block fill-slot="scripts">
 
       <script id="template-params-x-secret" type="text/x-tmpl">
-	<div class="row"><input type="text" name="auth_secret" placeholder="Secret" required /></div>
+	<tal:block condition="auth['type'] != 'x-secret'">
+	  <div class="row"><input type="text" name="auth_secret" placeholder="Secret" required /></div>
+	</tal:block>
+
+	<tal:block condition="auth['type'] == 'x-secret'">
+	  <div class="row"><input type="text" name="auth_secret" placeholder="Secret" required value="${auth['secret']}" /></div>
+	</tal:block>
       </script>
 
       <script id="template-params-basic" type="text/x-tmpl">
-	<div class="row"><input type="text" name="auth_username" placeholder="User name" required /></div>
-	<div class="row"><input type="text" name="auth_password" placeholder="Password" required /></div>
+	<tal:block condition="auth['type'] != 'basic'">
+	  <div class="row"><input type="text" name="auth_username" placeholder="User name" required /></div>
+	  <div class="row"><input type="text" name="auth_password" placeholder="Password" required /></div>
+	</tal:block>
+
+	<tal:block condition="auth['type'] == 'basic'">
+	  <div class="row"><input type="text" name="auth_username" placeholder="User name" required value="${auth['username']}" /></div>
+	  <div class="row"><input type="text" name="auth_password" placeholder="Password" required value="${auth['password']}" /></div>
+	</tal:block>
       </script>
 
       <script type="text/javascript">
         (function() {
 	    function params_widget(id) {
 		document.getElementById('authentication_params').innerHTML = tmpl('template-params-' + id, {});
+		$('select[name=authentication_type] > option').each(function (i, item) {
+		    if (item.value == id) item.selected = "selected";
+		});
 	    };
-	    params_widget(${transmission['params']['authentication]['type']}');
+	    params_widget('${auth["type"]}');
 	    document.getElementById('authentication_type').onchange = function (e) {
 		e = window.event || e;
 		params_widget(e.target.value);

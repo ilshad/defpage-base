@@ -1,4 +1,5 @@
 from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPNotFound
 from pyramid.renderers import render_to_response
 from defpage.base.config import system_params
 from defpage.base.transmission import TRANSMISSION_TYPES
@@ -150,11 +151,6 @@ def transmission_display(req):
             "transmission_id":tid,
             "type_id":o["type"]}
 
-def transmission_edit_rest(req):
-    tid = req.matchdict["transmission_id"]
-    o = meta.get_transmission(req.user.userid, req.matchdict['name'], tid)
-    return {}
-
 def transmission_delete(req):
     cid = req.matchdict['name']
     tid = req.matchdict["transmission_id"]
@@ -164,3 +160,37 @@ def transmission_delete(req):
             meta.delete_transmission(req.user.userid, cid, tid)
             return HTTPFound(location="/collection/%s/transmission" % cid)
     return {"description":o["description"]}
+
+def transmission_edit_rest(req):
+    cid = req.matchdict['name']
+    tid = req.matchdict["transmission_id"]
+    o = meta.get_transmission(req.user.userid, cid, tid)
+    if o["type"] != "rest":
+        raise HTTPNotFound
+    if req.POST.get("submit"):
+        description = req.POST.get("description")
+        url = req.POST.get("base_url")
+        atype = req.POST.get("authentication_type")
+        secret = req.POST.get("auth_secret")
+        username = req.POST.get("auth_username")
+        password = req.POST.get("auth_password")
+        data = None
+        if url and atype == "x-secret" and secret:
+            data = {"type":"rest",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"x-secret",
+                                                "secret":secret}}}
+        if url and atype == "basic" and username and password:
+            data = {"type":"rest",
+                    "description":description,
+                    "params":{"url":url,
+                              "authentication":{"type":"basic",
+                                                "username":username,
+                                                "password":password}}}
+        if data:
+            meta.put_transmission(req.user.userid, cid, tid, data)
+            return HTTPFound(location=u"/collection/%s/transmission/%s" % (cid, tid))
+    return {"description":o["description"],
+            "url":o["params"]["url"],
+            "auth":o["params"]["authentication"]}

@@ -114,18 +114,18 @@ def main(global_config, **settings):
                     route_name="transmission_display",
                     renderer="defpage.base:templates/transmission/display.pt")
 
-    config.add_route("transmission_edit_rest",
-                     "/collection/{name}/transmission/{transmission_id}/edit_rest",
-                     custom_predicates=(is_int,))
-    config.add_view("defpage.base.views.transmission_edit_rest",
-                    route_name="transmission_edit_rest",
-                    renderer="defpage.base:templates/transmission/edit_rest.pt")
-
     config.add_route("transmission_delete",
                      "/collection/{name}/transmission/{transmission_id}/delete",
                      custom_predicates=(is_int,))
     config.add_view("defpage.base.views.transmission_delete",
                     route_name="transmission_delete",
                     renderer="defpage.base:templates/transmission/delete.pt")
+
+    config.add_route("transmission_edit_rest",
+                     "/collection/{name}/transmission/{transmission_id}/edit_rest",
+                     custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.transmission_edit_rest",
+                    route_name="transmission_edit_rest",
+                    renderer="defpage.base:templates/transmission/edit_rest.pt")
 
     return config.make_wsgi_app()

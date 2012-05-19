@@ -76,12 +76,12 @@ def get_transmission(userid, cid, tid):
         raise HTTPNotFound
     raise ServiceCallError
 
-def put_transmission(userid, cid, tid, data):
-    r,c = _call(userid, "/collections/%s/transmissions/%s"%(str(cid), str(tid)), "PUT", json.pumps(data))
+def delete_transmission(userid, cid, tid):
+    r,c = _call(userid, "/collections/%s/transmissions/%s"%(str(cid), str(tid)), "DELETE", None)
     if r.status != 204:
         raise ServiceCallError
 
-def delete_transmission(userid, cid, tid):
-    r,c = _call(userid, "/collections/%s/transmissions/%s"%(str(cid), str(tid)), "DELETE", None)
+def put_transmission(userid, cid, tid, data):
+    r,c = _call(userid, "/collections/%s/transmissions/%s"%(str(cid), str(tid)), "PUT", json.dumps(data))
     if r.status != 204:
         raise ServiceCallError
