@@ -93,11 +93,11 @@ def main(global_config, **settings):
                     renderer="defpage.base:templates/source/overview.pt")
 
     # transmission
-    config.add_route("transmission_overview",
+    config.add_route("transmissions_overview",
                      "/collection/{name}/transmission",
                      custom_predicates=(is_int,))
-    config.add_view("defpage.base.views.transmission_overview",
-                    route_name="transmission_overview",
+    config.add_view("defpage.base.views.transmissions_overview",
+                    route_name="transmissions_overview",
                     renderer="defpage.base:templates/transmission/overview.pt")
 
     config.add_route("add_transmission_rest",
@@ -106,5 +106,12 @@ def main(global_config, **settings):
     config.add_view("defpage.base.views.add_transmission_rest",
                     route_name="add_transmission_rest",
                     renderer="defpage.base:templates/transmission/add_rest.pt")
+
+    config.add_route("transmission_display",
+                     "/collection/{name}/transmission/{transmission_id}",
+                     custom_predicates=(is_int,))
+    config.add_view("defpage.base.views.transmission_display",
+                    route_name="transmission_display",
+                    renderer="defpage.base:templates/transmission/display.pt")
 
     return config.make_wsgi_app()

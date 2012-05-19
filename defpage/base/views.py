@@ -105,7 +105,7 @@ def source_overview(req):
         return HTTPFound(location=u"%s/collection/%s" % (url, cid))
     return {"source":source, "source_types":stypes, "configured":configured}
 
-def transmission_overview(req):
+def transmissions_overview(req):
     cid = req.matchdict["name"]
     info = meta.get_collection(req.user.userid, cid)
     if req.POST.get("create_transmission"):
@@ -142,3 +142,11 @@ def add_transmission_rest(req):
             meta.create_transmission(req.user.userid, cid, data)
             return HTTPFound(location=u"/collection/%s/transmission" % cid)
     return {}
+
+def transmission_display(req):
+    tid = req.matchdict["transmission_id"]
+    o = meta.get_transmission(req.user.userid, req.matchdict['name'], tid)
+    return {"description":o["description"],
+            "transmission_id":tid}
+
+            

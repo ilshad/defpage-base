@@ -18,7 +18,7 @@
 	<tbody>
 	  <tr tal:repeat="item transmissions">
 	    <td>
-	      <a tal:attributes="href string:/collection/${active_collection_id}/transmission/${item.id}/edit"
+	      <a tal:attributes="href string:/collection/${active_collection_id}/transmission/${item.id}"
 		 tal:content="item.description" />
 	    </td>
 	    <td><time title="Last run time">2011-11-12 14:54</time></td>
@@ -27,6 +27,5 @@
 	</tbody>
       </table>
     </metal:block>
-    <metal:block fill-slot="scripts"></metal:block>
   </metal:block>
 </html>

@@ -67,3 +67,11 @@ def get_collection_transmissions(userid, cid):
     elif r.status == 404:
         raise HTTPNotFound
     raise ServiceCallError
+
+def get_transmission(userid, cid, tid):
+    r,c = _call(userid, "/collections/%s/transmissions/%s"%(str(cid), str(tid)), "GET", None)
+    if r.status == 200:
+        return json.loads(c)
+    elif r.status == 404:
+        raise HTTPNotFound
+    raise ServiceCallError
