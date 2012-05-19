@@ -21,7 +21,7 @@
 	  </div>
 	  <div id="authentication_params"></div>
 	  <div class="row">
-	    <input type="submit" name="submit" value="Continue" class="first" />
+	    <input type="submit" name="submit" value="Save" class="first" />
 	    <a href="/collection/${active_collection_id}/transmission">Close</a>
 	  </div>
 	</form>
