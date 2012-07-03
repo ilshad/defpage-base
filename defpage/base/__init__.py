@@ -10,7 +10,12 @@ from defpage.base.resources import get_root
 
 def main(global_config, **settings):
     system_params.update(settings)
-    session_factory = UnencryptedCookieSessionFactoryConfig("7oDVDSuJ")
+
+    session_factory = UnencryptedCookieSessionFactoryConfig(
+        system_params.unencrypted_session_cookie_secret,
+        cookie_name=system_params.unencrypted_session_cookie_name,
+        cookie_domain="." + system_params.domain_base)
+
     authentication_policy = UserInfoAuthenticationPolicy()
     config = Configurator()
     config.setup_registry(settings=settings,
