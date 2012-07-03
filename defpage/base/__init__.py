@@ -14,7 +14,7 @@ def main(global_config, **settings):
     session_factory = UnencryptedCookieSessionFactoryConfig(
         system_params.unencrypted_session_cookie_secret,
         cookie_name=system_params.unencrypted_session_cookie_name,
-        cookie_domain="." + system_params.domain_base)
+        cookie_domain=system_params.domain_base)
 
     authentication_policy = UserInfoAuthenticationPolicy()
     config = Configurator()
