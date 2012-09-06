@@ -2,7 +2,8 @@
 <html>
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
-      <div class="unified">
+      <h1 style="color:#676767;">${title}</h1>
+      <!--div class="unified">
 	<div class="alt_label">
 	  ${title}
 	</div>
@@ -15,14 +16,29 @@
 	    <td style="width:20%"><a href="/collection/${active_collection_id}/delete">Delete</a></td>
 	  </tr>
 	</table>
-      </div>
+      </div-->
 
       <ul class="collection_info">
-	<li tal:condition="source_title">Collection source: ${source_title}</li>
-	<li tal:condition="not source_title" class="">No source specified for this collection</li>
-	<li tal:condition="count_transmissions > 1" class="">${count_transmissions} transmissions are configured</li>
-	<li tal:condition="count_transmissions == 1" class="">1 transmission is configured</li>
-	<li tal:condition="count_transmissions == 0" class="">No transmissions specified for this collection</li>
+	<li tal:condition="source_title">
+	  Collection source: ${source_title}
+	  <a href="/collection/${active_collection_id}/source" class="go">&rArr; open</a>
+	</li>
+	<li tal:condition="not source_title">
+	  No source specified for this collection.
+	  <a href="/collection/${active_collection_id}/source" class="go">&rArr; set source</a>
+	</li>
+	<li tal:condition="count_transmissions > 1">
+	  ${count_transmissions} transmissions are configured.
+	  <a href="/collection/${active_collection_id}/transmission" class="go">&rArr; open</a>
+	</li>
+	<li tal:condition="count_transmissions == 1">
+	  1 transmission is configured.
+	  <a href="/collection/${active_collection_id}/transmission" class="go">&rArr; open</a>
+	</li>
+	<li tal:condition="count_transmissions == 0">
+	  No transmissions specified for this collection.
+	  <a href="/collection/${active_collection_id}/transmission" class="go">&rArr; set transmission</a>
+	</li>
 	<li>${count_documents} documents <a href="#" id="show_doclist" tal:condition="count_documents > 0">[ show ]</a>
 	  <a href="#" id="hide_doclist" style="display:none;">[ hide ]</a>
 	</li>
