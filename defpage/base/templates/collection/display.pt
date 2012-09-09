@@ -3,21 +3,6 @@
   <metal:block use-macro="layout.macros['master']">
     <metal:block fill-slot="main">
       <h1 style="color:#676767;">${title}</h1>
-      <!--div class="unified">
-	<div class="alt_label">
-	  ${title}
-	</div>
-	<table style="width:100%; margin:0;">
-	  <tr>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/source">Source</a></td>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/transmission">Transmission</a></td>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/properties">Properties</a></td>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/roles">Roles</a></td>
-	    <td style="width:20%"><a href="/collection/${active_collection_id}/delete">Delete</a></td>
-	  </tr>
-	</table>
-      </div-->
-
       <ul class="collection_info">
 	<li tal:condition="source_title">
 	  Collection source: ${source_title}
