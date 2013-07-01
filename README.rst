@@ -1,17 +1,17 @@
-================
-defpage.com base
-================
+============
+defpage base
+============
 
 Deploy
 ======
 
 Create virtual environment::
 
-  $ git clone git@spacta.com:defpage/base.git
+  $ git clone git@github.com:astoon/defpage-base.git
   $ cd defpage_site
   $ virtualenv --no-site-packages --distribute .
 
-Install shared python library for defpage (take it here: git@spacta.com:defpage/pylib.git)::
+Install shared python library for defpage (take it here: git@github.com:satoon-defpage-pylib.git)::
 
   $ bin/pip install -e [ path_to_pylib ]
 
